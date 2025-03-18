@@ -1,0 +1,1063 @@
+/* homepage.css */
+:root {
+  --primary-green: #3a8f3a;
+  --light-green: #5cb85c;
+  --dark-green: #2c682c;
+  --accent-green: #6fce6f;
+  --white: #ffffff;
+  --off-white: #f9f9f9;
+  --light-gray: #e0e0e0;
+  --text-dark: #333333;
+  --text-light: #666666;
+  --earth-brown: #8b4513;
+  --light-brown: #a67c52;
+  --sunny-yellow: #ffd700;
+  --water-blue: #4682b4;
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* Base styles */
+.home-container {
+  max-width: 100%;
+  overflow-x: hidden;
+  font-family: 'Roboto', sans-serif;
+  color: var(--text-dark);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Hero Section */
+.home-hero {
+  position: relative;
+  height: 90vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: var(--dark-green);
+}
+
+.home-hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://img2.wallspic.com/crops/7/5/5/1/21557/21557-estacion_de_la_colina-montaje_de_escenografia-el_pastoreo-naturaleza-ecosistema-1920x1080.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+  animation: fadeIn 1.5s ease-out;
+}
+
+.home-hero-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(42, 94, 42, 0.8) 0%, rgba(58, 143, 58, 0.6) 100%);
+  z-index: 2;
+}
+
+.home-hero-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  max-width: 900px;
+  padding: 0 2rem;
+  color: var(--white);
+  animation: slideUp 1s ease-out;
+}
+
+.home-hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.home-hero-description {
+  font-size: 1.5rem;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.home-cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.home-cta-button {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.home-cta-button.primary {
+  background-color: var(--primary-green);
+  color: var(--white);
+}
+
+.home-cta-button.primary:hover {
+  background-color: var(--dark-green);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.home-cta-button.secondary {
+  background-color: transparent;
+  color: var(--white);
+  border: 2px solid var(--white);
+}
+
+.home-cta-button.secondary:hover {
+  background-color: var(--white);
+  color: var(--primary-green);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.home-cta-button.large {
+  padding: 1.2rem 3rem;
+  font-size: 1.3rem;
+}
+
+/* Section Headers */
+.home-section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.home-section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-green);
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+}
+
+.home-section-divider {
+  height: 4px;
+  width: 60px;
+  background-color: var(--primary-green);
+  margin: 0 auto;
+  position: relative;
+}
+
+.home-section-divider::before {
+  content: '';
+  position: absolute;
+  height: 4px;
+  width: 0;
+  background-color: var(--accent-green);
+  left: 0;
+  transition: width 0.8s ease;
+}
+
+.home-section-header:hover .home-section-divider::before {
+  width: 100%;
+}
+
+/* Featured Product Section */
+.home-featured-product {
+  padding: 5rem 2rem;
+  background-color: var(--off-white);
+}
+
+.home-featured-product-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  animation: fadeIn 1s ease-out;
+}
+
+.home-featured-product-image {
+  flex: 1;
+  min-width: 300px;
+  height: 400px;
+  overflow: hidden;
+}
+
+.home-featured-product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.home-featured-product-image img:hover {
+  transform: scale(1.05);
+}
+
+.home-placeholder-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--light-gray);
+  color: var(--text-light);
+  font-size: 1.5rem;
+}
+
+.home-featured-product-details {
+  flex: 1;
+  min-width: 300px;
+  padding: 2.5rem;
+}
+
+.home-featured-product-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-green);
+  margin-bottom: 1rem;
+}
+
+.home-featured-product-rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.home-star {
+  color: var(--light-gray);
+  font-size: 1.2rem;
+  margin-right: 0.2rem;
+}
+
+.home-star.filled {
+  color: var(--sunny-yellow);
+}
+
+.home-rating-count {
+  margin-left: 0.5rem;
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+.home-featured-product-description {
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  color: var(--text-light);
+}
+
+.home-featured-product-price {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.home-price-label {
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.home-price-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-green);
+}
+
+.home-featured-product-stock {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.home-stock-label {
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.home-stock-value {
+  font-weight: 500;
+}
+
+.home-stock-value.in-stock {
+  color: var(--primary-green);
+}
+
+.home-stock-value.out-of-stock {
+  color: #e74c3c;
+}
+
+.home-featured-product-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.home-product-action-button {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 5px;
+  border: 1px solid var(--primary-green);
+  background-color: transparent;
+  color: var(--primary-green);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.home-product-action-button:hover {
+  background-color: var(--light-green);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.home-product-action-button.primary {
+  background-color: var(--primary-green);
+  color: var(--white);
+}
+
+.home-product-action-button.primary:hover {
+  background-color: var(--dark-green);
+}
+
+/* IoT Greenhouse Control */
+.home-iot-control {
+  padding: 5rem 2rem;
+  background-color: var(--white);
+}
+
+.home-iot-dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.home-iot-stats {
+  flex: 1;
+  min-width: 300px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.home-iot-stat-card {
+  background-color: var(--off-white);
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.home-iot-stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.home-iot-stat-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.home-iot-stat-icon.temperature {
+  background-image: url('https://cdn-icons-png.flaticon.com/512/6239/6239785.png');
+}
+
+.home-iot-stat-icon.humidity {
+  background-image: url('https://cdn-icons-png.flaticon.com/512/1113/1113723.png');
+}
+
+.home-iot-stat-icon.soil {
+  background-image: url('/images/soil-icon.svg');
+}
+
+.home-iot-stat-icon.light {
+  background-image: url('/images/light-icon.svg');
+}
+
+.home-iot-stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-green);
+  margin-bottom: 0.5rem;
+}
+
+.home-iot-stat-label {
+  font-size: 1rem;
+  color: var(--text-light);
+}
+
+.home-iot-controls {
+  flex: 1;
+  min-width: 300px;
+  background-color: var(--off-white);
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.home-iot-controls-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-green);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.home-iot-control-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.home-iot-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.2rem;
+  background-color: var(--white);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.home-iot-button:hover {
+  background-color: var(--light-green);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.home-iot-button:hover .home-iot-button-label {
+  color: var(--white);
+}
+
+.home-iot-button-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 0.8rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.home-iot-button-icon.irrigation {
+  background-image: url('/images/irrigation-icon.svg');
+}
+
+.home-iot-button-icon.ventilation {
+  background-image: url('/images/ventilation-icon.svg');
+}
+
+.home-iot-button-icon.lighting {
+  background-image: url('/images/lighting-icon.svg');
+}
+
+.home-iot-button-icon.temperature-control {
+  background-image: url('/images/temperature-control-icon.svg');
+}
+
+.home-iot-button-label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  transition: color 0.3s ease;
+}
+
+/* Services Section */
+.home-services {
+  padding: 5rem 2rem;
+  background-color: var(--off-white);
+  position: relative;
+}
+
+.home-services::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/images/pattern-leaf.svg');
+  background-size: 200px;
+  opacity: 0.05;
+  z-index: 0;
+}
+
+.home-services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.home-service-card {
+  background-color: var(--white);
+  border-radius: 10px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.home-service-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background-color: var(--primary-green);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s ease;
+}
+
+.home-service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.home-service-card:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.home-service-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.5s ease;
+}
+
+.home-service-card:hover .home-service-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.home-service-icon.products {
+  background-image: url('/images/products-icon.svg');
+}
+
+.home-service-icon.transactions {
+  background-image: url('/images/transactions-icon.svg');
+}
+
+.home-service-icon.management {
+  background-image: url('/images/management-icon.svg');
+}
+
+.home-service-icon.greenhouse {
+  background-image: url('/images/greenhouse-icon.svg');
+}
+
+.home-service-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-green);
+  margin-bottom: 1rem;
+}
+
+.home-service-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+}
+
+.home-service-link {
+  display: inline-block;
+  color: var(--primary-green);
+  font-weight: 600;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.home-service-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary-green);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.home-service-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Seasonal Products Section */
+.home-seasonal-products {
+  padding: 5rem 2rem;
+  background-color: var(--white);
+}
+
+.home-seasonal-products-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.home-product-card {
+  background-color: var(--white);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.home-product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+}
+
+.home-product-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.home-product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.home-product-card:hover .home-product-image img {
+  transform: scale(1.1);
+}
+
+.home-product-details {
+  padding: 1.5rem;
+}
+
+.home-product-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+  height: 2.8em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.home-product-rating {
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+
+.home-product-price {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary-green);
+  margin-bottom: 1rem;
+}
+
+.home-product-button {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: transparent;
+  border: 1px solid var(--primary-green);
+  color: var(--primary-green);
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.home-product-button:hover {
+  background-color: var(--primary-green);
+  color: var(--white);
+}
+
+/* Testimonials Section */
+.home-testimonials {
+  padding: 5rem 2rem;
+  background-color: var(--dark-green);
+  color: var(--white);
+}
+
+.home-testimonials .home-section-title {
+  color: var(--white);
+}
+
+.home-testimonials .home-section-divider {
+  background-color: var(--white);
+}
+
+.home-testimonials-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.home-testimonial {
+  flex: 1;
+  min-width: 300px;
+  max-width: 450px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.home-testimonial::before {
+  content: '"';
+  position: absolute;
+  top: 0;
+  left: 20px;
+  font-size: 8rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.1);
+  z-index: -1;
+}
+
+.home-testimonial-quote {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.home-testimonial-author {
+  font-weight: 600;
+  color: var(--light-green);
+}
+
+/* Call to Action Section */
+.home-cta-section {
+  padding: 6rem 2rem;
+  background-image: linear-gradient(to right, var(--primary-green), var(--dark-green));
+  position: relative;
+  overflow: hidden;
+}
+
+.home-cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/images/pattern-leaves.svg');
+  background-size: cover;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+.home-cta-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--white);
+}
+
+.home-cta-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  animation: pulse 3s infinite;
+}
+
+.home-cta-description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+}
+
+/* Loading Spinner */
+.home-loading-spinner {
+  width: 60px;
+  height: 60px;
+  margin: 2rem auto;
+  border: 6px solid var(--light-gray);
+  border-top: 6px solid var(--primary-green);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Product Not Found */
+.home-product-not-found {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: var(--text-light);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .home-hero-title {
+    font-size: 3rem;
+  }
+
+  .home-hero-description {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 991px) {
+  .home-section-title {
+    font-size: 2.2rem;
+  }
+
+  .home-hero-title {
+    font-size: 2.8rem;
+  }
+
+  .home-hero-description {
+    font-size: 1.2rem;
+  }
+
+  .home-featured-product-title {
+    font-size: 1.8rem;
+  }
+
+  .home-cta-title {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-hero {
+    height: 80vh;
+  }
+
+  .home-hero-title {
+    font-size: 2.5rem;
+  }
+
+  .home-hero-description {
+    font-size: 1.1rem;
+  }
+
+  .home-featured-product-image {
+    height: 300px;
+  }
+
+  .home-cta-title {
+    font-size: 2rem;
+  }
+
+  .home-cta-description {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .home-hero {
+    height: 70vh;
+  }
+
+  .home-hero-title {
+    font-size: 2.2rem;
+  }
+
+  .home-hero-description {
+    font-size: 1rem;
+  }
+
+  .home-cta-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .home-section-title {
+    font-size: 2rem;
+  }
+
+  .home-featured-product-details {
+    padding: 1.5rem;
+  }
+
+  .home-featured-product-title {
+    font-size: 1.6rem;
+  }
+
+  .home-service-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .home-cta-title {
+    font-size: 1.8rem;
+  }
+
+  .home-cta-description {
+    font-size: 1rem;
+  }
+
+  .home-cta-button.large {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+  }
+}
+
+/* Fallback styles for missing icons */
+.home-service-icon,
+.home-iot-stat-icon,
+.home-iot-button-icon {
+  position: relative;
+}
+
+.home-service-icon::after,
+.home-iot-stat-icon::after,
+.home-iot-button-icon::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-green);
+  font-size: 2rem;
+}
+
+.home-service-icon.products::after {
+  content: '🌱';
+}
+
+.home-service-icon.transactions::after {
+  content: '🤝';
+}
+
+.home-service-icon.management::after {
+  content: '📊';
+}
+
+.home-service-icon.greenhouse::after {
+  content: '🏡';
+}
+
+.home-iot-stat-icon.temperature::after {
+  content: '🌡️';
+}
+
+.home-iot-stat-icon.humidity::after {
+  content: '💧';
+}
+
+.home-iot-stat-icon.soil::after {
+  content: '🌱';
+}
+
+.home-iot-stat-icon.light::after {
+  content: '☀️';
+}
+
+.home-iot-button-icon.irrigation::after {
+  content: '💦';
+}
+
+.home-iot-button-icon.ventilation::after {
+  content: '💨';
+}
+
+.home-iot-button-icon.lighting::after {
+  content: '💡';
+}
+
+.home-iot-button-icon.temperature-control::after {
+  content: '🌡️';
+}

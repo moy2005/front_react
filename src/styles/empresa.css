@@ -1,0 +1,198 @@
+/* Main container styles */
+.vetcare-empresa-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+    background-color: #f9fbfa;
+    min-height: 100vh;
+  }
+  
+  /* Page header styles */
+  .vetcare-page-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  .vetcare-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2a7d4f;
+    margin-bottom: 10px;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .vetcare-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #2a7d4f, #5fb27d);
+    border-radius: 2px;
+  }
+  
+  .vetcare-subtitle {
+    font-size: 1.2rem;
+    color: #5a5a5a;
+    font-weight: 400;
+  }
+  
+  /* Cards container grid layout */
+  .vetcare-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+  }
+  
+  /* Card styles */
+  .vetcare-card {
+    background-color: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    position: relative;
+    height: 100%;
+    min-height: 280px;
+  }
+  
+  .vetcare-card-content {
+    padding: 30px 25px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* Card icon styles */
+  .vetcare-card-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: white;
+    background: linear-gradient(135deg, #2a7d4f, #5fb27d);
+  }
+  
+  /* Custom colors for different card types - using green variations */
+  .vetcare-card-misiones .vetcare-card-icon {
+    background: linear-gradient(135deg, #2a7d4f, #5fb27d);
+  }
+  
+  .vetcare-card-visiones .vetcare-card-icon {
+    background: linear-gradient(135deg, #287a4c, #71c992);
+  }
+  
+  .vetcare-card-politicas .vetcare-card-icon {
+    background: linear-gradient(135deg, #1a6e3f, #4ca36d);
+  }
+  
+  .vetcare-card-preguntasFre .vetcare-card-icon {
+    background: linear-gradient(135deg, #3a8d5f, #81d9a2);
+  }
+  
+  /* Card title and description */
+  .vetcare-card-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #333;
+  }
+  
+  .vetcare-card-description {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.5;
+    flex-grow: 1;
+  }
+  
+  /* Card hover indicator */
+  .vetcare-card-indicator {
+    height: 4px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg, #2a7d4f, #5fb27d);
+    border-radius: 2px 2px 0 0;
+  }
+  
+  /* Card shine effect on hover */
+  .vetcare-card-shine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.8) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-20deg);
+    z-index: 1;
+  }
+  
+  /* Paw print decorations */
+  .vetcare-decoration {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.1;
+  }
+  
+  .vetcare-paw {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%232a7d4f' d='M256 244c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-122-90c18.1 0 32.9-14.8 32.9-32.9s-14.8-32.9-32.9-32.9-32.9 14.8-32.9 32.9 14.7 32.9 32.9 32.9zm244 0c18.1 0 32.9-14.8 32.9-32.9s-14.8-32.9-32.9-32.9-32.9 14.8-32.9 32.9 14.7 32.9 32.9 32.9zm-196 0c18.1 0 32.9-14.8 32.9-32.9s-14.8-32.9-32.9-32.9-32.9 14.8-32.9 32.9 14.7 32.9 32.9 32.9zm148 0c18.1 0 32.9-14.8 32.9-32.9s-14.8-32.9-32.9-32.9-32.9 14.8-32.9 32.9 14.7 32.9 32.9 32.9z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  
+  .vetcare-paw-1 {
+    top: 10%;
+    right: 10%;
+    transform: rotate(45deg);
+  }
+  
+  .vetcare-paw-2 {
+    bottom: 15%;
+    left: 5%;
+    transform: rotate(-20deg);
+  }
+  
+  .vetcare-paw-3 {
+    top: 50%;
+    left: 85%;
+    transform: rotate(15deg);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .vetcare-cards-container {
+      grid-template-columns: 1fr;
+    }
+    
+    .vetcare-title {
+      font-size: 2rem;
+    }
+    
+    .vetcare-subtitle {
+      font-size: 1rem;
+    }
+  }

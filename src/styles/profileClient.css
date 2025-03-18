@@ -1,0 +1,305 @@
+/* Modern Profile CSS with Green and White Theme */
+:root {
+    --primary-green: #00a86b;
+    --primary-light: #e6f7f0;
+    --primary-dark: #007c4f;
+    --white: #ffffff;
+    --light-gray: #f8f8f8;
+    --med-gray: #e0e0e0;
+    --text-dark: #333333;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+  }
+  
+  /* Main Container */
+  .admin-profile-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Poppins', 'Segoe UI', Roboto, sans-serif;
+    color: var(--text-dark);
+    background-color: var(--white);
+  }
+  
+  /* Profile Header */
+  .admin-profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--med-gray);
+  }
+  
+  .admin-welcome-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  .admin-username {
+    color: var(--primary-green);
+    font-weight: 700;
+  }
+  
+  .admin-edit-button {
+    background-color: var(--primary-green);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+  }
+  
+  .admin-edit-button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+  }
+  
+  /* Dashboard Grid */
+  .admin-dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .admin-dashboard-card {
+    background-color: var(--white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-dark);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border: 1px solid var(--med-gray);
+  }
+  
+  .admin-dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-green);
+  }
+  
+  .products-card:hover {
+    background-color: var(--primary-light);
+  }
+  
+  .devices-card:hover {
+    background-color: var(--primary-light);
+  }
+  
+  .admin-card-icon {
+    background-color: var(--primary-green);
+    color: var(--white);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-right: 1.2rem;
+    flex-shrink: 0;
+  }
+  
+  .admin-card-content {
+    flex-grow: 1;
+  }
+  
+  .admin-card-content h2 {
+    font-size: 1.25rem;
+    margin: 0 0 0.5rem 0;
+    font-weight: 600;
+  }
+  
+  .admin-card-content p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  /* Modal Styles */
+  .admin-profile-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .admin-profile-modal {
+    background-color: var(--white);
+    border-radius: 12px;
+    padding: 0;
+    width: 90%;
+    max-width: 550px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  }
+  
+  .admin-profile-modal-header {
+    background-color: var(--primary-green);
+    color: var(--white);
+    padding: 1.2rem 1.5rem;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .admin-profile-modal-header h2 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+  
+  .admin-modal-close {
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+  }
+  
+  /* Form Styles */
+  .admin-profile-form {
+    padding: 1.5rem;
+  }
+  
+  .admin-form-group {
+    margin-bottom: 1.2rem;
+  }
+  
+  .admin-form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-dark);
+  }
+  
+  .admin-form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--med-gray);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: var(--transition);
+  }
+  
+  .admin-form-group input:focus {
+    outline: none;
+    border-color: var(--primary-green);
+    box-shadow: 0 0 0 2px rgba(0, 168, 107, 0.2);
+  }
+  
+  .admin-form-section {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--med-gray);
+  }
+  
+  .admin-form-section h3 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+  }
+  
+  .admin-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  .admin-cancel-button {
+    background-color: var(--med-gray);
+    color: var(--text-dark);
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  
+  .admin-save-button {
+    background-color: var(--primary-green);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  
+  .admin-cancel-button:hover {
+    background-color: #d0d0d0;
+  }
+  
+  .admin-save-button:hover {
+    background-color: var(--primary-dark);
+  }
+  
+  .admin-save-button:disabled {
+    background-color: #b0b0b0;
+    cursor: not-allowed;
+  }
+  
+  /* Loading State */
+  .admin-profile-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    font-size: 1.2rem;
+    color: var(--primary-green);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .admin-profile-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    
+    .admin-actions {
+      width: 100%;
+    }
+    
+    .admin-edit-button {
+      width: 100%;
+      justify-content: center;
+    }
+    
+    .admin-form-actions {
+      flex-direction: column;
+    }
+    
+    .admin-cancel-button, 
+    .admin-save-button {
+      width: 100%;
+    }
+  }

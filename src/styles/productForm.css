@@ -1,0 +1,266 @@
+/* Estilos para el Formulario de Productos */
+/* Basado en los estilos de login existentes con adaptaciones específicas */
+
+/* Contenedor principal */
+.product-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #2d3748;
+    padding: 20px;
+}
+
+/* Caja del formulario con efecto de cristal */
+.product-form-box {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    width: 600px;
+    max-width: 95%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Título del formulario */
+.product-form-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 30px;
+}
+
+/* Grupo de inputs */ 
+.input-group {
+    margin-bottom: 20px;
+}
+
+/* Contenedor para input con icono */
+.input-with-icon {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/* Estilo para el icono del input */
+.input-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    background-color: #28a745;
+    color: white;
+    border-radius: 8px 0 0 8px;
+    margin-right: -1px;
+}
+
+/* Etiqueta para los campos */
+.input-label {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 6px;
+    text-align: left;
+    transition: color 0.3s ease-in-out;
+}
+
+/* Campos de entrada */
+.input-field {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #28a745;
+    border-radius: 0 8px 8px 0;
+    background-color: white;
+    color: #000000;
+    outline: none;
+    transition: all 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* Placeholders para los campos */
+.input-field::placeholder {
+    color: rgba(0, 0, 0, 0.5);
+    padding-left: 5px;
+}
+
+/* Efecto al enfocar un campo */
+.input-field:focus {
+    border-color: #218838;
+    box-shadow: 0 0 10px #218838;
+    transform: scale(1.02);
+}
+
+/* Área de texto para la descripción */
+textarea.input-field {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Mensaje de requisitos para imágenes */
+.requirement-message {
+    margin: 2px 0 15px;
+    color: #ff9999;
+    font-size: 12px;
+    text-align: left;
+    height: 16px;
+}
+
+/* Mensaje de error */
+.error-message {
+    color: #ff4d4d;
+    font-size: 14px;
+    margin-top: 5px;
+    text-align: left;
+}
+
+/* Contenedor de botones flexible */
+.button-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Estilos para el botón principal */
+.primary-button {
+    flex: 3;
+    background-color: #28a745;
+    color: white;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.primary-button:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px #218838;
+}
+
+.primary-button:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Botón secundario para Cancelar */
+.secondary-button {
+    flex: 1;
+    background-color: #6c757d;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.secondary-button:hover {
+    background-color: #5a6268;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(90, 98, 104, 0.6);
+}
+
+/* Botón de eliminación */
+.delete-button {
+    width: 100%;
+    margin-top: 15px;
+    background-color: #dc3545;
+    color: white;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(200, 35, 51, 0.6);
+}
+
+/* Mensaje de confirmación de eliminación */
+.delete-confirmation {
+    margin-top: 15px;
+}
+
+.delete-confirmation-message {
+    color: #ff4d4d;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.delete-confirmation-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* Footer del formulario */
+.form-footer {
+    color: white;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+/* Estilos para los enlaces */
+.link {
+    color: #28a745;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+.link:hover {
+    color: #218838;
+    text-decoration: underline;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Diseño Responsivo */
+@media (max-width: 480px) {
+    .product-form-box {
+        padding: 30px;
+    }
+
+    .product-form-title {
+        font-size: 20px;
+    }
+
+    .button-container {
+        flex-direction: column;
+    }
+
+    .primary-button, 
+    .secondary-button {
+        width: 100%;
+    }
+}
+

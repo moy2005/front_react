@@ -1,0 +1,218 @@
+/* inicio.css */
+
+:root {
+    --color-leaf-green: #4CAF50;
+    --color-light-green: #8BC34A;
+    --color-pale-green: #DCEDC8;
+    --color-off-white: #F9FBF7;
+    --color-soil-brown: #795548;
+    --color-wheat: #F5DEB3;
+    --shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.08);
+    --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
+    --transition-standard: all 0.3s ease;
+    --border-radius: 12px;
+  }
+  
+  /* Container principal */
+  .inicio-container {
+    background: var(--color-off-white);
+    min-height: 100vh;
+    padding: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Mensaje de carga */
+  .loading {
+    color: var(--color-leaf-green);
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 2rem;
+    background: var(--color-pale-green);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-soft);
+    margin: 2rem auto;
+    max-width: 400px;
+    animation: pulse 1.5s infinite ease-in-out;
+  }
+  
+  @keyframes pulse {
+    0% { opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { opacity: 0.7; }
+  }
+  
+  /* Grid para dispositivos */
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  /* Tarjeta de dispositivo */
+  .device-card, .add-card {
+    background: white;
+    border-radius: var(--border-radius) !important;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-standard);
+    border: none !important;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem !important;
+    position: relative;
+  }
+  
+  .device-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--color-leaf-green);
+    opacity: 0;
+    transition: var(--transition-standard);
+  }
+  
+  .device-card:hover::before {
+    opacity: 1;
+  }
+  
+  .device-card:hover, .add-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+  }
+  
+  /* Estilos para iconos */
+  .icon {
+    font-size: 2.5rem !important;
+    margin-bottom: 1rem;
+    transition: var(--transition-standard);
+  }
+  
+  .device-card .icon {
+    color: var(--color-leaf-green);
+  }
+  
+  .add-card .icon {
+    color: var(--color-light-green);
+    font-size: 2.8rem !important;
+  }
+  
+  .device-card:hover .icon {
+    transform: scale(1.1);
+  }
+  
+  .add-card:hover .icon {
+    transform: rotate(90deg) scale(1.1);
+  }
+  
+  /* Títulos y textos */
+  .device-title {
+    font-weight: 600;
+    margin: 0.5rem 0;
+    color: #333;
+    font-size: 1.1rem;
+    text-align: center;
+  }
+  
+  .device-type {
+    color: #666;
+    margin: 0;
+    font-size: 0.9rem;
+    background-color: var(--color-pale-green);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    margin-top: 0.5rem;
+  }
+  
+  /* Estilos específicos para la tarjeta de añadir */
+  .add-card {
+    background: linear-gradient(145deg, var(--color-pale-green), var(--color-off-white));
+    border: 2px dashed var(--color-light-green) !important;
+  }
+  
+  /* Estilos específicos para los tipos de dispositivos */
+  .device-card:has(.device-type:contains('Ordenador')) {
+    border-bottom: 3px solid var(--color-leaf-green) !important;
+  }
+  
+  .device-card:has(.device-type:contains('Móvil')) {
+    border-bottom: 3px solid var(--color-light-green) !important;
+  }
+  
+  .device-card:has(.device-type:contains('Luz')) {
+    border-bottom: 3px solid var(--color-wheat) !important;
+  }
+  
+  /* Estilos para modal */
+  .ant-modal-content {
+    border-radius: var(--border-radius) !important;
+    overflow: hidden;
+  }
+  
+  .ant-modal-header {
+    background-color: var(--color-leaf-green) !important;
+    padding: 1rem 1.5rem !important;
+  }
+  
+  .ant-modal-title {
+    color: white !important;
+    font-weight: 600 !important;
+  }
+  
+  .ant-modal-footer .ant-btn-primary {
+    background-color: var(--color-leaf-green) !important;
+    border-color: var(--color-leaf-green) !important;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .grid-container {
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+    
+    .inicio-container {
+      padding: 1rem;
+    }
+    
+    .device-card, .add-card {
+      height: 150px;
+      padding: 1rem !important;
+    }
+    
+    .icon {
+      font-size: 2rem !important;
+    }
+  }
+  
+  /* Animación de entrada para las tarjetas */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .device-card, .add-card {
+    animation: fadeInUp 0.5s ease-out forwards;
+  }
+  
+  .grid-container > *:nth-child(1) { animation-delay: 0.1s; }
+  .grid-container > *:nth-child(2) { animation-delay: 0.2s; }
+  .grid-container > *:nth-child(3) { animation-delay: 0.3s; }
+  .grid-container > *:nth-child(4) { animation-delay: 0.4s; }
+  .grid-container > *:nth-child(5) { animation-delay: 0.5s; }
+  .grid-container > *:nth-child(6) { animation-delay: 0.6s; }
+  .grid-container > *:nth-child(7) { animation-delay: 0.7s; }
+  .grid-container > *:nth-child(8) { animation-delay: 0.8s; }
+  .grid-container > *:nth-child(9) { animation-delay: 0.9s; }

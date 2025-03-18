@@ -1,0 +1,201 @@
+/* Main Container */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    color: #333;
+  }
+  
+  /* Header Styles */
+  .dashboard-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: #f8f9fa;
+    border-radius: 12px 12px 0 0;
+    padding-top: 2rem;
+  }
+  
+  .profile-icon {
+    color: #28a745;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .profile-icon:hover {
+    transform: scale(1.05);
+  }
+  
+  .dashboard-header h1 {
+    color: #333;
+    font-size: 2rem;
+    margin: 1rem 0;
+    font-weight: bold;
+  }
+  
+  .role-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: #333;
+  }
+  
+  .role-info .icon {
+    color: #28a745;
+  }
+  
+  .verified {
+    color: #28a745;
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+  }
+  
+  /* Message Styles */
+  .message {
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 25px;
+    text-align: center;
+  }
+  
+  .message.success {
+    background-color: #d4edda;
+    color: #28a745;
+    border: 1px solid #28a745;
+  }
+  
+  /* Profile Section */
+  .profile-section {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+  }
+  
+  /* Form Styles */
+  .profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .profile-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: #333;
+    font-weight: 500;
+  }
+  
+  .profile-form input {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .profile-form input:focus {
+    outline: none;
+    border-color: #28a745;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+  }
+  
+  /* Profile Info */
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .profile-info p {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #333;
+    padding: 10px 15px;
+    background-color: white;
+    border-radius: 25px;
+    border: 1px solid #e0e0e0;
+  }
+  
+  .profile-info .icon,
+  .profile-form .icon {
+    color: #28a745;
+  }
+  
+  /* Button Styles */
+  .btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .btn.edit {
+    background-color: #28a745;
+    color: white;
+    width: 100%;
+  }
+  
+  .btn.edit:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+  }
+  
+  .btn.save {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .btn.save:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+  }
+  
+  .btn.cancel {
+    background-color: #ff4d4d;
+    color: white;
+  }
+  
+  .btn.cancel:hover {
+    background-color: #dc3545;
+    transform: translateY(-2px);
+  }
+  
+  .form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .dashboard-container {
+      margin: 1rem;
+      padding: 1rem;
+    }
+  
+    .profile-section {
+      padding: 1rem;
+    }
+  
+    .form-actions {
+      flex-direction: column;
+    }
+  
+    .btn {
+      width: 100%;
+    }
+  }

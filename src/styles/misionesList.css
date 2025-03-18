@@ -1,0 +1,413 @@
+/* Estilos principales para MisionesList */
+.vet-mission-container {
+  font-family: "Poppins", sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  color: #333;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Encabezado */
+.vet-mission-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e0f2e9;
+}
+
+.vet-mission-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #2e7d32;
+  margin: 0;
+}
+
+/* Botones principales */
+.vet-mission-create-btn {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.vet-mission-create-btn:before {
+  content: "+";
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.vet-mission-create-btn:hover {
+  background-color: #1b5e20;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Estado vacío */
+.vet-mission-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: 2rem;
+  background-color: #e8f5e9;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.vet-mission-text {
+  font-size: 1.1rem;
+  color: #4a4a4a;
+  margin-bottom: 1.5rem;
+}
+
+/* Tabla de misiones */
+.vet-mission-table-responsive {
+  overflow-x: auto;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.vet-mission-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.vet-mission-table th {
+  background-color: #43a047;
+  color: white;
+  text-align: left;
+  padding: 1rem;
+  font-weight: 500;
+  position: relative;
+}
+
+.vet-mission-table th:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.vet-mission-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #e0f2e9;
+  vertical-align: middle;
+}
+
+.vet-mission-table tr:last-child td {
+  border-bottom: none;
+}
+
+.vet-mission-table tr:hover {
+  background-color: #f1f8e9;
+}
+
+/* Estado de la misión */
+.vet-mission-table tr td:nth-child(3) {
+  position: relative;
+}
+
+.vet-mission-table tr td:nth-child(3):before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.vet-mission-table tr td[data-label="Estado"]:before {
+  background-color: #4caf50;
+}
+
+.vet-mission-table tr td[data-label="Estado"]:contains("Inactivo"):before {
+  background-color: #f44336;
+}
+
+/* Botones de acción */
+.vet-mission-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.vet-mission-edit-btn,
+.vet-mission-delete-btn {
+  border: none;
+  border-radius: 6px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.vet-mission-edit-btn {
+  background-color: #66bb6a;
+  color: white;
+}
+
+.vet-mission-delete-btn {
+  background-color: #ef5350;
+  color: white;
+}
+
+.vet-mission-edit-btn:hover {
+  background-color: #43a047;
+  transform: translateY(-2px);
+}
+
+.vet-mission-delete-btn:hover {
+  background-color: #e53935;
+  transform: translateY(-2px);
+}
+
+/* Modal */
+.vet-mission-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.vet-mission-modal-overlay.vet-mission-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.vet-mission-modal-container {
+  background-color: white;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.vet-mission-modal-overlay.vet-mission-active .vet-mission-modal-container {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.vet-mission-modal-header {
+  background-color: #43a047;
+  color: white;
+  padding: 1.2rem 1.5rem;
+  position: relative;
+}
+
+.vet-mission-modal-title {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.vet-mission-modal-body {
+  padding: 1.5rem;
+}
+
+.vet-mission-form-group {
+  margin-bottom: 1.2rem;
+}
+
+.vet-mission-form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #444;
+}
+
+.vet-mission-form-control {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.vet-mission-form-control:focus {
+  outline: none;
+  border-color: #66bb6a;
+  box-shadow: 0 0 0 3px rgba(102, 187, 106, 0.2);
+}
+
+.vet-mission-textarea-control {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.vet-mission-modal-footer {
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.vet-mission-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.vet-mission-btn-cancel {
+  background-color: #f5f5f5;
+  color: #616161;
+}
+
+.vet-mission-btn-success {
+  background-color: #43a047;
+  color: white;
+}
+
+.vet-mission-btn-cancel:hover {
+  background-color: #e0e0e0;
+}
+
+.vet-mission-btn-success:hover {
+  background-color: #2e7d32;
+}
+
+/* Estados de carga y error */
+.vet-mission-loading-container,
+.vet-mission-error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  text-align: center;
+}
+
+.vet-mission-loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid #e8f5e9;
+  border-top: 3px solid #43a047;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.vet-mission-error-container h2 {
+  color: #e53935;
+  margin-bottom: 0.5rem;
+}
+
+.vet-mission-retry-btn {
+  background-color: #43a047;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.vet-mission-retry-btn:hover {
+  background-color: #2e7d32;
+}
+
+/* Notificaciones toast */
+.vet-mission-toast-notification {
+  background-color: #43a047 !important;
+  color: white !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .vet-mission-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .vet-mission-table {
+    display: block;
+  }
+
+  .vet-mission-table thead {
+    display: none;
+  }
+
+  .vet-mission-table tr {
+    display: block;
+    border: 1px solid #e0f2e9;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+
+  .vet-mission-table td {
+    display: flex;
+    justify-content: space-between;
+    text-align: right;
+    padding: 0.8rem 1rem;
+  }
+
+  .vet-mission-table td::before {
+    content: attr(data-label);
+    font-weight: 500;
+    text-align: left;
+    color: #2e7d32;
+  }
+
+  .vet-mission-table td:not(:last-child) {
+    border-bottom: 1px solid #e0f2e9;
+  }
+
+  .vet-mission-actions {
+    margin-left: auto;
+  }
+}
