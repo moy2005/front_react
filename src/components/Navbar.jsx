@@ -225,7 +225,7 @@ function Navbar() {
                       <Link to="/cliente/profile">Ver Perfil</Link>
                       <Link to="/dispositivos">Dispositivo IoT</Link>
                       <button onClick={handleLogout} className="logout-btn">
-                        <i className="fas fa-sign-out-alt"></i> Cerrar Sesión
+                        <i className="fas fa-sign-out-alt txt"></i> Cerrar Sesión
                       </button>
                     </div>
                   </div>
@@ -256,7 +256,7 @@ function Navbar() {
                         <i className="fas fa-building"></i> Empresa
                       </Link>
                       <button onClick={handleLogout} className="logout-btn">
-                        <i className="fas fa-sign-out-alt"></i> Cerrar Sesión
+                        <i className="fas fa-sign-out-alt txt"></i> Cerrar Sesión
                       </button>
                     </div>
                   </div>
