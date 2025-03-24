@@ -50,7 +50,7 @@
   
   @font-face {
     font-family: 'NewSun';
-    src: url('/public/fonts/NextSunday.ttf') format('truetype');
+    src: url('/public/fonts/NextSunday.otf') format('opentype');
   }
   
   @font-face {
