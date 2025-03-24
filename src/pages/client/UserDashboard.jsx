@@ -90,6 +90,9 @@ const UserDashboard = () => {
       clean: true,
       reconnectPeriod: 1000,
       connectTimeout: 30 * 1000,
+      // Añade estas opciones para conexiones seguras:
+  rejectUnauthorized: false, // Solo para desarrollo (no usar en producción)
+  protocol: 'wss' // Fuerza el protocolo seguro
     };
 
     const url = "wss://raba7554.ala.dedicated.aws.emqxcloud.com:8083/mqtt";
