@@ -2,7 +2,7 @@ import { PlusOutlined, DesktopOutlined, MobileOutlined, BulbOutlined } from '@an
 import React, { useState } from 'react';
 import { Card } from 'antd';
 import ModalAddDevice from '../../components/ModalAddDevice';
-import { useUser } from '../../hooks/useUsers.JS';
+import { useUser } from '../../hooks/useUsers';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/inicio.css';
 
