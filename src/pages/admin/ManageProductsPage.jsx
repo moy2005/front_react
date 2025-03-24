@@ -13,6 +13,8 @@ function ProductTable() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1); // Estado para la página actual
+  const [productsPerPage] = useState(5); // Número de productos por página
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -31,6 +33,7 @@ function ProductTable() {
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
+    setCurrentPage(1); // Reinicia la página a 1 al realizar una búsqueda
   };
 
   const filteredProducts = products.filter((product) =>
@@ -38,6 +41,14 @@ function ProductTable() {
     (product.category && typeof product.category === "object" && product.category.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
     (product.marca && typeof product.marca === "object" && product.marca.name.toLowerCase().includes(searchTerm.toLowerCase()))
   );
+
+  // Lógica de paginación
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  // Cambiar de página
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   if (loading) {
     return (
@@ -92,20 +103,18 @@ function ProductTable() {
         <h2 className="table-title">Gestión de Productos</h2>
         
         <div className="search-container">
-        <input
-          type="text"
-          placeholder="Buscar producto..."
-          value={searchTerm}
-          onChange={handleSearch}
-          className="search-input"
-        />
-      </div>
+          <input
+            type="text"
+            placeholder="Buscar producto..."
+            value={searchTerm}
+            onChange={handleSearch}
+            className="search-input"
+          />
+        </div>
         <Link to="/products/create" className="create-btn">
           <FaPlus /> Crear Producto
         </Link>
       </div>
-
-
 
       <div className="table-responsive">
         <table className="table">
@@ -116,13 +125,11 @@ function ProductTable() {
               <th><span className="th-content"><FaBox /> Stock</span></th>
               <th><span className="th-content"><FaTags /> Categoría</span></th>
               <th><span className="th-content"><FaTrademark /> Marca</span></th>
-              <th><span className="th-content"><FaStar /> Valoración</span></th>
-              <th><span className="th-content"><MdOutlineRateReview /> Reseñas</span></th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
-            {filteredProducts.map((product) => (
+            {currentProducts.map((product) => (
               <tr key={product._id}>
                 <td>{product.name}</td>
                 <td className="price-column">${product.price.toFixed(2)}</td>
@@ -141,10 +148,6 @@ function ProductTable() {
                       : "No especificada")
                     : "No especificada"}
                 </td>
-                <td className="rating-column">
-                  {product.rating || 0} <FaStar className="star-icon" />
-                </td>
-                <td className="reviews-column">{product.reviews ? product.reviews.length : 0}</td>
                 <td className="product-actions">
                   <button
                     className="view-btn"
@@ -173,7 +176,28 @@ function ProductTable() {
           </tbody>
         </table>
       </div>
-      
+
+      {/* Controles de paginación */}
+      <div className="pagination">
+        <button
+          onClick={() => paginate(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="pagination-btn"
+        >
+          Anterior
+        </button>
+        <span className="pagination-info">
+          Página {currentPage} de {Math.ceil(filteredProducts.length / productsPerPage)}
+        </span>
+        <button
+          onClick={() => paginate(currentPage + 1)}
+          disabled={currentPage === Math.ceil(filteredProducts.length / productsPerPage)}
+          className="pagination-btn"
+        >
+          Siguiente
+        </button>
+      </div>
+
       {showModal && selectedProduct && (
         <ProductDetailsModal 
           product={selectedProduct} 
@@ -185,3 +209,4 @@ function ProductTable() {
 }
 
 export default ProductTable;
+

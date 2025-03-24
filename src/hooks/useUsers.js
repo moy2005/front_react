@@ -34,3 +34,4 @@ export const useUser = () => {
 
     return { dispositivos, loading };
 };
+

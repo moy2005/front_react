@@ -1,0 +1,358 @@
+/* Estilos generales del contenedor */
+.IoT-historial-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  color: #2c3e50;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Encabezado del historial */
+.IoT-historial-header {
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(46, 204, 113, 0.2);
+}
+
+.IoT-historial-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: #2c3e50;
+  position: relative;
+  display: inline-block;
+}
+
+.IoT-historial-title::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #27ae60, #2ecc71);
+  border-radius: 2px;
+}
+
+.IoT-historial-subtitle {
+  font-size: 1rem;
+  color: #7f8c8d;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.IoT-mac-address {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  font-family: monospace;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+/* Filtros */
+.IoT-historial-filters {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.IoT-filtro-grupo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.IoT-filtro-grupo label {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.IoT-filtro-select {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background-color: white;
+  color: #2c3e50;
+  outline: none;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.IoT-filtro-select:focus {
+  border-color: #2ecc71;
+  box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+}
+
+/* Resumen diario */
+.IoT-historial-resumen {
+  margin-bottom: 2rem;
+}
+
+.IoT-historial-resumen-title {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.IoT-historial-resumen-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.IoT-historial-resumen-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-left: 4px solid #2ecc71;
+}
+
+.IoT-historial-resumen-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.IoT-historial-resumen-fecha {
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+  font-size: 1.1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.IoT-historial-resumen-acciones {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.IoT-historial-resumen-accion {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.IoT-historial-resumen-icon {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: #f8f9fa;
+  border-radius: 50%;
+}
+
+.IoT-historial-resumen-label {
+  color: #7f8c8d;
+  font-weight: 500;
+  flex: 1;
+}
+
+.IoT-historial-resumen-value {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #27ae60;
+  background-color: #e8f5e9;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  min-width: 2rem;
+  text-align: center;
+}
+
+/* Lista de acciones */
+.IoT-historial-lista {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.IoT-historial-lista-title {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  font-weight: 600;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.IoT-loading,
+.IoT-error,
+.IoT-no-data {
+  padding: 2rem;
+  text-align: center;
+  color: #7f8c8d;
+  font-size: 1.1rem;
+}
+
+.IoT-error {
+  color: #e74c3c;
+}
+
+.IoT-historial-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.IoT-historial-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  transition: transform 0.15s ease;
+  border-left: 3px solid transparent;
+}
+
+.IoT-historial-item:hover {
+  transform: translateX(3px);
+  background-color: #f5f5f5;
+}
+
+/* Colores específicos para cada tipo de acción */
+.IoT-historial-item:has(.IoT-ventilador-color) {
+  border-left-color: #3498db;
+}
+
+.IoT-historial-item:has(.IoT-ventana-color) {
+  border-left-color: #f39c12;
+}
+
+.IoT-historial-item:has(.IoT-riego-color) {
+  border-left-color: #2ecc71;
+}
+
+.IoT-historial-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.IoT-ventilador-color {
+  background-color: #e3f2fd;
+  color: #3498db;
+  border: 1px solid rgba(52, 152, 219, 0.3);
+}
+
+.IoT-ventana-color {
+  background-color: #fff8e1;
+  color: #f39c12;
+  border: 1px solid rgba(243, 156, 18, 0.3);
+}
+
+.IoT-riego-color {
+  background-color: #e8f5e9;
+  color: #2ecc71;
+  border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+.IoT-historial-content {
+  flex: 1;
+}
+
+.IoT-historial-accion-tipo {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: #2c3e50;
+}
+
+.IoT-historial-estado {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.IoT-historial-estado-anterior,
+.IoT-historial-estado-nuevo {
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.IoT-historial-estado-anterior {
+  background-color: #f0f0f0;
+  color: #7f8c8d;
+}
+
+.IoT-historial-estado-nuevo {
+  background-color: #e8f5e9;
+  color: #27ae60;
+  font-weight: 600;
+}
+
+.IoT-historial-flecha {
+  font-size: 0.85rem;
+  color: #95a5a6;
+}
+
+.IoT-historial-fecha {
+  font-size: 0.85rem;
+  color: #95a5a6;
+}
+
+/* Efectos de carga */
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.IoT-loading {
+  animation: pulse 1.5s infinite;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+  .IoT-historial-container {
+    padding: 1rem;
+  }
+
+  .IoT-historial-resumen-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .IoT-historial-estado {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .IoT-historial-flecha {
+    transform: rotate(90deg);
+    margin: 0.25rem 0;
+  }
+}

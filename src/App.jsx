@@ -58,7 +58,8 @@ import UbicacionList from './pages/admin/UbicacionList.jsx';
 import { RedesSocialesProvider } from './context/RedesSociales.jsx';
 import RedesSocialesList from './pages/admin/RedesSocialesList.jsx';
 import PreguntasFrecuentes from './pages/publica/PreguntasFrecuentes.jsx';
-
+import HistorialAcciones from './pages/client/HistorialAcciones.jsx';
+import Breadcrumbs from './pages/Breadcrumbs.jsx';
 
 function App() {
   return (
@@ -75,8 +76,10 @@ function App() {
                     <BrowserRouter>
                       <main>
                         <Navbar /> {/* Barra de navegación */}
-                        <ToastContainer position="top-right" autoClose={3000} />
+                        <Breadcrumbs/>
 
+                        <ToastContainer position="top-right" autoClose={3000} />
+                        
                         <Routes>
                           {/* 📌 Rutas Públicas */}
                           <Route path="/" element={<HomePage />} />
@@ -105,9 +108,13 @@ function App() {
                          
                              <Route path="/dispositivo/:macAddress" element={<UserDashboard />} />
                             <Route path="/dispositivos" element={<Inicio />} />
+                            <Route path="/historialAcciones/:macAddress" element={<HistorialAcciones />} />
                           </Route>
 
+                          
+
                           <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+
                             <Route path="/admin/profile-admin" element={<ProfilePageAdmin />} />
                             <Route path="/manage-orders" element={<ManageOrdersPage />} />
                             <Route path="/manage-products" element={<ManageProductsPage />} />

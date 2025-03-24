@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import MQTT from 'mqtt';
+import instance from '../api/axios';
 
 export const useMqtt = (macAddress) => {
     const [datos, setDatos] = useState({
@@ -17,6 +18,18 @@ export const useMqtt = (macAddress) => {
     const clientRef = useRef(null);
     const lastMessageTimeRef = useRef(null);
 
+    const guardarEstadoEnBD = async (payload) => {
+        try {
+            const response = await instance.post('/estado-dispositivo', {
+                macAddress,
+                ...payload
+            });
+            console.log("Estado guardado en la base de datos:", response.data);
+        } catch (error) {
+            console.error("Error al guardar el estado en la base de datos:", error);
+        }
+    };
+
     useEffect(() => {
         if (!macAddress) {
             console.error("MAC Address no proporcionada");
@@ -24,7 +37,6 @@ export const useMqtt = (macAddress) => {
             return;
         }
 
-        // Configuración de cliente MQTT - SOLO PARA LECTURA DE DATOS
         const mqttOptions = {
             clientId: `sensor-reader-${macAddress}-${Math.random().toString(16).substring(2, 8)}`,
             username: "moy19",
@@ -34,14 +46,11 @@ export const useMqtt = (macAddress) => {
             connectTimeout: 30 * 1000
         };
 
-        // Para navegadores, usar WebSocket en lugar de TCP
         const brokerUrl = "ws://raba7554.ala.dedicated.aws.emqxcloud.com:8083/mqtt";
         clientRef.current = MQTT.connect(brokerUrl, mqttOptions);
 
         clientRef.current.on('connect', () => {
             console.log("Conectado al broker MQTT para lectura de sensores");
-            
-            // Solo suscribirse al tema del sensor para datos
             const sensorTopic = `mi/topico/sensor/${macAddress}`;
             clientRef.current.subscribe(sensorTopic, (err) => {
                 if (!err) {
@@ -59,8 +68,7 @@ export const useMqtt = (macAddress) => {
                 try {
                     const payload = JSON.parse(message.toString());
                     console.log("Datos del sensor recibidos:", payload);
-                    
-                    // Actualizar todos los datos disponibles del mensaje
+
                     setDatos({
                         temperatura: payload.temperatura,
                         humedad: payload.humedad,
@@ -71,8 +79,9 @@ export const useMqtt = (macAddress) => {
                         ventiladorVelocidad: payload.ventiladorVelocidad,
                         riegoActivo: payload.riegoActivo === "true" || payload.riegoActivo === true
                     });
-                    
-                    // Actualizar tiempo del último mensaje
+
+                    guardarEstadoEnBD(payload); // Guardar el estado en la base de datos
+
                     lastMessageTimeRef.current = Date.now();
                     setConectado(true);
                 } catch (error) {
@@ -81,7 +90,6 @@ export const useMqtt = (macAddress) => {
             }
         });
 
-        // Verificar desconexión por timeout
         const intervalo = setInterval(() => {
             if (lastMessageTimeRef.current && Date.now() - lastMessageTimeRef.current > 15000) {
                 console.log("No se han recibido mensajes en el tiempo esperado");
@@ -96,7 +104,6 @@ export const useMqtt = (macAddress) => {
 
         setLoading(false);
 
-        // Limpieza
         return () => {
             clearInterval(intervalo);
             if (clientRef.current) {
@@ -108,3 +115,4 @@ export const useMqtt = (macAddress) => {
 
     return { datos, conectado, loading };
 };
+

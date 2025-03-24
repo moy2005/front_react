@@ -1,7 +1,11 @@
 import React from "react";
 import "./../../styles/footer.css";
+import { Link } from "react-router-dom";
+import { useCategories } from "../../context/CategoryContext"; // Importa el contexto de categorías
 
 const Footer = () => {
+  const { categories } = useCategories(); // Obtén las categorías desde el contexto
+
   return (
     <footer>
       <div className="footer-content">
@@ -13,31 +17,64 @@ const Footer = () => {
             asesoramiento experto desde 2010.
           </p>
           <div className="social-links">
-            <a href="#"><i className="fab fa-facebook-f"></i></a>
-            <a href="#"><i className="fab fa-twitter"></i></a>
-            <a href="#"><i className="fab fa-instagram"></i></a>
-            <a href="#"><i className="fab fa-linkedin-in"></i></a>
+            <a href="#">
+              <i className="fab fa-facebook-f"></i>
+            </a>
+            <a href="#">
+              <i className="fab fa-twitter"></i>
+            </a>
+            <a href="#">
+              <i className="fab fa-instagram"></i>
+            </a>
+            <a href="#">
+              <i className="fab fa-linkedin-in"></i>
+            </a>
           </div>
         </div>
         <div className="footer-column">
           <h3 className="h1-form">Enlaces Rapidos</h3>
           <ul className="footer-links txt">
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#nosotros">Sobre Nosotros</a></li>
-            <li><a href="#destacados">Productos</a></li>
-            <li><a href="#testimonios">Testimonios</a></li>
-            <li><a href="#contacto">Contacto</a></li>
+            <li>
+              <Link to="/" className="social-links">
+                Inicio
+              </Link>
+            </li>
+            <li>
+              <Link to="/nosotros" className="social-links">
+                Sobre Nosotros
+              </Link>
+            </li>
+            <li>
+              <Link to="/catalog" className="social-links">
+                Productos
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact" className="social-links">
+                Contacto
+              </Link>
+            </li>
+            <li>
+              <Link to="/public/preguntasFre" className="social-links">
+                Preguntas Frecuentes
+              </Link>
+            </li>
           </ul>
         </div>
         <div className="footer-column">
           <h3 className="h1-form">Productos</h3>
           <ul className="footer-links txt">
-            <li><a href="#">Fertilizantes</a></li>
-            <li><a href="#">Semillas</a></li>
-            <li><a href="#">Sistemas de Riego</a></li>
-            <li><a href="#">Herramientas</a></li>
-            <li><a href="#">Invernaderos</a></li>
-            <li><a href="#">Control de Plagas</a></li>
+            {/* Mostrar las categorías dinámicas */}
+            {categories.map((category) => (
+              <li key={category._id}>
+                <Link
+                  to={`/catalog?category=${category._id}`} // Redirige al catálogo con la categoría seleccionada
+                  className="social-links"
+                >
+                  {category.name}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="footer-column">
@@ -48,7 +85,9 @@ const Footer = () => {
           </p>
           <form className="newsletter-form">
             <input type="email" placeholder="Tu email" required />
-            <button type="submit"><i className="fas fa-paper-plane"></i></button>
+            <button type="submit">
+              <i className="fas fa-paper-plane"></i>
+            </button>
           </form>
         </div>
       </div>
@@ -63,4 +102,3 @@ const Footer = () => {
 };
 
 export default Footer;
-

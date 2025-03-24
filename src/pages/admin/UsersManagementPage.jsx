@@ -18,6 +18,8 @@ function UsersManagementPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [updateLoading, setUpdateLoading] = useState(false);
   const [updateMessage, setUpdateMessage] = useState({ text: "", type: "" });
+  const [currentPage, setCurrentPage] = useState(1); // Estado para la página actual
+  const [usersPerPage] = useState(10); // Número de usuarios por página
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -37,9 +39,8 @@ function UsersManagementPage() {
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
+    setCurrentPage(1); // Reinicia la página a 1 al realizar una búsqueda
   };
-
-  console.log(users) 
 
   const filteredUsers = users.filter((user) =>
     (user.realName?.toLowerCase().includes(searchTerm.toLowerCase()) || "") ||
@@ -49,78 +50,14 @@ function UsersManagementPage() {
     (searchTerm.toLowerCase() === "verificado" && user.isVerified === true) ||
     (searchTerm.toLowerCase() === "no verificado" && user.isVerified === false)
   );
-  
 
-  const handleDelete = async (id) => {
-    try {
-      if (window.confirm("¿Estás seguro de que deseas eliminar este usuario?")) {
-        await deleteUser(id);
-        // Actualiza la lista de usuarios después de eliminar
-        const updatedUsers = users.filter(user => user._id !== id);
-        setUsers(updatedUsers);
-      }
-    } catch (error) {
-      console.error("Error al eliminar el usuario:", error);
-    }
-  };
+  // Lógica de paginación
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
 
-  const openModal = (user) => {
-    setSelectedUser(user);
-    setShowModal(true);
-  };
-
-  
-  const openRoleModal = (user) => {
-    setUserToEdit(user);
-    setSelectedRole(user.role);
-    setShowRoleModal(true);
-  };
-
-  const handleRoleChange = (e) => {
-    setSelectedRole(e.target.value);
-  };
-
-  const handleRoleUpdate = async () => {
-    if (!userToEdit || selectedRole === userToEdit.role) {
-      setShowRoleModal(false);
-      return;
-    }
-
-    setUpdateLoading(true);
-    setUpdateMessage({ text: "", type: "" });
-
-    try {
-      const response = await updateUser(userToEdit._id, { role: selectedRole });
-      
-      // Update the user in the local state
-      const updatedUsers = users.map(user => {
-        if (user._id === userToEdit._id) {
-          return { ...user, role: selectedRole };
-        }
-        return user;
-      });
-      
-      setUsers(updatedUsers);
-      setUpdateMessage({ 
-        text: "Rol actualizado con éxito", 
-        type: "success" 
-      });
-      
-      setTimeout(() => {
-        setShowRoleModal(false);
-        setUpdateMessage({ text: "", type: "" });
-      }, 2000);
-      
-    } catch (error) {
-      console.error("Error al actualizar el rol:", error);
-      setUpdateMessage({ 
-        text: "Error al actualizar el rol", 
-        type: "error" 
-      });
-    } finally {
-      setUpdateLoading(false);
-    }
-  };
+  // Cambiar de página
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   if (loading) {
     return (
@@ -185,21 +122,18 @@ function UsersManagementPage() {
               <th><span className="th-content"><FaUser /> Apellido</span></th>
               <th><span className="th-content"><FaEnvelope /> Email</span></th>
               <th><span className="th-content"><FaUserTag /> Rol</span></th>
-          
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
-            {filteredUsers.map((user) => (
+            {currentUsers.map((user) => (
               <tr key={user._id}>
                 <td>{user.realName}</td>
                 <td>{user.lastName}</td>
                 <td>{user.email}</td>
-            
                 <td className={`role-column ${user.role === "admin" ? "admin-role" : "client-role"}`}>
                   {user.role === "admin" ? "Administrador" : "Cliente"}
                 </td>
-               
                 <td className="user-actions">
                   <button
                     className="view-btn"
@@ -228,7 +162,28 @@ function UsersManagementPage() {
           </tbody>
         </table>
       </div>
-      
+
+      {/* Controles de paginación */}
+      <div className="pagination">
+        <button
+          onClick={() => paginate(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="pagination-btn"
+        >
+          Anterior
+        </button>
+        <span className="pagination-info">
+          Página {currentPage} de {Math.ceil(filteredUsers.length / usersPerPage)}
+        </span>
+        <button
+          onClick={() => paginate(currentPage + 1)}
+          disabled={currentPage === Math.ceil(filteredUsers.length / usersPerPage)}
+          className="pagination-btn"
+        >
+          Siguiente
+        </button>
+      </div>
+
       {showModal && selectedUser && (
         <UserDetailsModal 
           user={selectedUser} 
@@ -236,8 +191,8 @@ function UsersManagementPage() {
         />
       )}
 
-         {/* Modal para editar el rol */}
-         {showRoleModal && userToEdit && (
+      {/* Modal para editar el rol */}
+      {showRoleModal && userToEdit && (
         <div className="user-modal-overlay">
           <div className="user-modal">
             <div className="user-modal-header">
@@ -256,7 +211,6 @@ function UsersManagementPage() {
               <p>
                 <strong>Email:</strong> {userToEdit.email}
               </p>
-              
               <div className="user-form-group">
                 <label>Rol:</label>
                 <select 
@@ -269,7 +223,6 @@ function UsersManagementPage() {
                   <option value="admin">Administrador</option>
                 </select>
               </div>
-              
               {updateMessage.text && (
                 <div className={`user-message ${updateMessage.type === "success" ? "user-success" : "user-error"}`}>
                   {updateMessage.text}
@@ -295,9 +248,9 @@ function UsersManagementPage() {
           </div>
         </div>
       )}
-
     </div>
   );
 }
 
 export default UsersManagementPage;
+

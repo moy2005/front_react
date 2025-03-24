@@ -1,6 +1,6 @@
 import axios from "axios";
-//const URI = "https://api-agristore.vercel.app/api";
-const URI = "http://localhost:4000/api";
+const URI = "https://api-agristore.vercel.app/api";
+//const URI = "http://localhost:4000/api";
 
 const instance = axios.create({
     baseURL: URI,
@@ -31,7 +31,7 @@ instance.interceptors.response.use(
             // Si el token está expirado o es inválido, puedes borrar el token y redirigir
             localStorage.removeItem("token");
             console.warn("Token inválido o expirado. Redirigiendo a login...");
-            window.location.href = "/login";  // Redirigir al login
+           // window.location.href = "/login";  // Redirigir al login
         }
         return Promise.reject(error);
     }

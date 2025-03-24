@@ -7,7 +7,6 @@ import { useAuth } from '../../context/AuthContext';
 import Modal from 'react-modal';
 import '../../styles/profileClient.css';
 
-
 // Configurar el elemento raíz de la aplicación para react-modal
 Modal.setAppElement('#root');
 
@@ -24,6 +23,7 @@ function ProfilePage() {
     newPassword: '',
     confirmPassword: ''
   });
+
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {

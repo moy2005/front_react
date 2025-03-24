@@ -223,7 +223,7 @@ function Navbar() {
                     </button>
                     <div className={`dropdown-content ${isProfileOpen ? 'show' : ''}`}>
                       <Link to="/cliente/profile">Ver Perfil</Link>
-                      <Link to="/iot-device">Dispositivo IoT</Link>
+                      <Link to="/dispositivos">Dispositivo IoT</Link>
                       <button onClick={handleLogout} className="logout-btn">
                         <i className="fas fa-sign-out-alt"></i> Cerrar Sesión
                       </button>
@@ -321,7 +321,7 @@ function Navbar() {
             <li className="vet-nav-item">
                 <div className="vet-category-dropdown" ref={categoryMenuRef}>
                   <button
-                    className="vet-nav-link vet-category-button"
+                    className="vet-nav-link vet-category-button txt"
                     onClick={toggleCategoryMenu}
                     aria-expanded={isCategoryMenuOpen}
                   >
@@ -347,8 +347,7 @@ function Navbar() {
                 </div>
               </li>
             <li><Link to="/nosotros" onClick={() => setIsMenuOpen(false)}>Empresa</Link></li>
-            <li><Link to="/contact" onClick={() => setIsMenuOpen(false)}>Contacto</Link></li>
-            <li><Link to="/public/preguntasFre" onClick={() => setIsMenuOpen(false)}>Preguntas</Link></li>
+
 
             {/* Only show admin links in the mobile menu (desktop uses dropdown in header) */}
             {isMobile && hasRole("admin") && (
