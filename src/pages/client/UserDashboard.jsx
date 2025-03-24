@@ -92,7 +92,7 @@ const UserDashboard = () => {
       connectTimeout: 30 * 1000,
     };
 
-    const url = "ws://raba7554.ala.dedicated.aws.emqxcloud.com:8083/mqtt";
+    const url = "wss://raba7554.ala.dedicated.aws.emqxcloud.com:8083/mqtt";
     client.current = MQTT.connect(url, mqttOptions);
 
     client.current.on("connect", () => {
