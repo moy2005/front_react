@@ -120,17 +120,6 @@ function ProfilePageAdmin() {
         </div>
 
         <div className="admin-form-group">
-          <label>Correo Electrónico</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="admin-form-group">
           <label>Teléfono</label>
           <input
             type="tel"
