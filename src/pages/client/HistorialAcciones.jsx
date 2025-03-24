@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import instance from "../../api/axios";
-import "../../styles/IotHistorial.css";
+import "../../styles/IoTHistorial.css";
 
 const HistorialAcciones = () => {
   const { macAddress } = useParams();
