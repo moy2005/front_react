@@ -133,17 +133,22 @@ const UserDashboard = () => {
   // Función para actualizar el estado en la BD y enviar comando MQTT
   const actualizarEstado = async (tipo, nuevoEstado) => {
     try {
-      // Primero actualizar en la base de datos
-      const payload = {};
-      if (tipo === "ventana") {
-        payload.ventanaAbierta = nuevoEstado;
-      } else if (tipo === "riego") {
-        payload.riegoActivo = nuevoEstado;
-      } else if (tipo === "ventilador") {
-        payload.ventiladorActivo = nuevoEstado;
-      }
-
-      await instance.post(`/estado-dispositivo/${macAddress}`, payload);
+      // Primero obtener el último estado para asegurarnos de tener todos los campos
+      const { data: estadoActual } = await instance.get(
+        `/estado-dispositivo/${macAddress}/ultimo`
+      );
+  
+      // Preparar el payload con todos los campos actuales + el cambio
+      const payload = {
+        macAddress, // Asegurarse de incluir la MAC
+        ...estadoActual, // Mantener todos los valores actuales
+        [tipo === "ventana" ? "ventanaAbierta" : 
+         tipo === "riego" ? "riegoActivo" : 
+         "ventiladorActivo"]: nuevoEstado
+      };
+  
+      // Enviar la actualización (POST al endpoint sin parámetro en la URL)
+      const response = await instance.post('/estado-dispositivo', payload);
       
       // Luego enviar el comando MQTT según el estado
       let topic, mensaje;
@@ -158,27 +163,21 @@ const UserDashboard = () => {
         topic = `mi/topico/ventilador/${macAddress}`;
         mensaje = nuevoEstado ? "encender" : "apagar";
       }
-
+  
       if (client.current && mqttConnected) {
-        client.current.publish(
-          topic,
-          mensaje,
-          { qos: 1, retain: false },
-          (error) => {
-            if (error) {
-              console.error(`❌ Error al publicar en ${topic}:`, error);
-            } else {
-              console.log(`✅ Mensaje enviado a ${topic}: ${mensaje}`);
-            }
-          }
-        );
+        client.current.publish(topic, mensaje, { qos: 1 }, (error) => {
+          if (error) console.error(`Error MQTT: ${error}`);
+        });
       }
-
+  
       // Actualizar los datos locales
       obtenerDatosSensores();
       
     } catch (error) {
-      console.error("❌ Error al actualizar el estado:", error);
+      console.error("Error completo:", error);
+      if (error.response) {
+        console.error("Datos del error:", error.response.data);
+      }
     }
   };
 
