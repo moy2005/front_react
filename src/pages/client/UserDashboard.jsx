@@ -28,7 +28,9 @@ const UserDashboard = () => {
   // Función para obtener los datos de sensores
   const obtenerDatosSensores = async () => {
     try {
-      const response = await instance.get(`/estado-dispositivo/${macAddress}/ultimo`);
+      const response = await instance.get(
+        `/estado-dispositivo/${macAddress}/ultimo`
+      );
       setUltimoEstado(response.data);
       setDatosSensores({
         humedad: response.data.humedad,
@@ -63,10 +65,10 @@ const UserDashboard = () => {
 
     // Establecer WebSocket o EventSource para escuchar cambios en la BD
     const eventSource = new EventSource(`/api/device-updates/${macAddress}`);
-    
+
     eventSource.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      
+
       // Si hay cambios en los datos, actualizar el estado
       if (data.updated) {
         obtenerDatosSensores();
@@ -84,18 +86,20 @@ const UserDashboard = () => {
     if (!macAddress) return;
 
     const mqttOptions = {
-      clientId: `frontend-${macAddress}-${Math.random().toString(16).substring(2, 8)}`,
+      clientId: `frontend-${macAddress}-${Math.random()
+        .toString(16)
+        .substring(2, 8)}`,
       username: "moy19",
       password: "moy19",
       clean: true,
       reconnectPeriod: 1000,
       connectTimeout: 30 * 1000,
       // Añade estas opciones para conexiones seguras:
-  rejectUnauthorized: false, // Solo para desarrollo (no usar en producción)
-  protocol: 'wss' // Fuerza el protocolo seguro
+      rejectUnauthorized: false, // Solo para desarrollo (no usar en producción)
+      protocol: 'wss' // Fuerza el protocolo seguro
     };
 
-    const url = "wss://raba7554.ala.dedicated.aws.emqxcloud.com:8083/mqtt";
+    const url = "ws://raba7554.ala.dedicated.aws.emqxcloud.com:8084/mqtt";
     client.current = MQTT.connect(url, mqttOptions);
 
     client.current.on("connect", () => {
@@ -128,7 +132,9 @@ const UserDashboard = () => {
     });
 
     client.current.on("message", (topic, message) => {
-      console.log(`📨 Mensaje recibido en tema ${topic}: ${message.toString()}`);
+      console.log(
+        `📨 Mensaje recibido en tema ${topic}: ${message.toString()}`
+      );
 
       if (topic.includes("servo")) {
         setLastCommands((prev) => ({ ...prev, servo: message.toString() }));
@@ -178,7 +184,7 @@ const UserDashboard = () => {
         estadoNuevo,
       });
       console.log(`✅ Acción ${tipoAccion} registrada en el historial`);
-      
+
       // Actualizar datos de sensores después de registrar una acción
       obtenerDatosSensores();
     } catch (error) {
@@ -210,7 +216,9 @@ const UserDashboard = () => {
         tipoAccion = "riego";
         break;
       case "ventilador":
-        estadoAnterior = datosSensores.ventiladorActivo ? "Encendido" : "Apagado";
+        estadoAnterior = datosSensores.ventiladorActivo
+          ? "Encendido"
+          : "Apagado";
         tipoAccion = "ventilador";
         break;
       case "velocidad":
@@ -397,7 +405,10 @@ const UserDashboard = () => {
                     style={{
                       height: `${Math.min(
                         100,
-                        Math.max(0, ((datosSensores.temperatura || 0) - 10) / 30) * 100
+                        Math.max(
+                          0,
+                          ((datosSensores.temperatura || 0) - 10) / 30
+                        ) * 100
                       )}%`,
                     }}
                   ></div>
@@ -462,7 +473,10 @@ const UserDashboard = () => {
                     obtenerEstadoHumedad(datosSensores.humedad)
                   )}`}
                   style={{
-                    width: `${Math.min(100, Math.max(0, datosSensores.humedad))}%`,
+                    width: `${Math.min(
+                      100,
+                      Math.max(0, datosSensores.humedad)
+                    )}%`,
                   }}
                 ></div>
               </div>
@@ -504,7 +518,10 @@ const UserDashboard = () => {
                 <div
                   className="IoT-progress-bar"
                   style={{
-                    width: `${Math.min(100, Math.max(0, datosSensores.humedadSuelo))}%`,
+                    width: `${Math.min(
+                      100,
+                      Math.max(0, datosSensores.humedadSuelo)
+                    )}%`,
                   }}
                 ></div>
               </div>
@@ -529,7 +546,9 @@ const UserDashboard = () => {
             <div className="IoT-card-body">
               <div className="IoT-control-status">
                 Estado:{" "}
-                <strong>{datosSensores.ventanaAbierta ? "Abierta" : "Cerrada"}</strong>
+                <strong>
+                  {datosSensores.ventanaAbierta ? "Abierta" : "Cerrada"}
+                </strong>
               </div>
               <div className="IoT-control-buttons">
                 <button
@@ -640,7 +659,9 @@ const UserDashboard = () => {
             <div className="IoT-card-body">
               <div className="IoT-control-status">
                 Estado:{" "}
-                <strong>{datosSensores.riegoActivo ? "Activo" : "Inactivo"}</strong>
+                <strong>
+                  {datosSensores.riegoActivo ? "Activo" : "Inactivo"}
+                </strong>
               </div>
               <div className="IoT-control-buttons">
                 <button
