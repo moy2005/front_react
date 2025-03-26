@@ -50,13 +50,13 @@ function RegisterPage() {
     if (isAuthenticated) navigate("/login");
   }, [isAuthenticated]);
 
-  // Modificar el onSubmit para usar toastify
+  // Modificar el onSubmit para el nuevo flujo sin verificación
   const onSubmit = async (values) => {
     try {
       const result = await signup(values);
       if (result?.success) {
-        toast.success("¡Registro exitoso! Verifica tu correo electrónico.");
-        navigate("/verify", { state: { email: values.email } });
+        toast.success("¡Registro exitoso! Ahora puedes iniciar sesión.");
+        navigate("/login");
       }
     } catch (error) {
       console.error("Error durante el registro:", error);
@@ -64,7 +64,7 @@ function RegisterPage() {
     }
   };
 
-  // Funciones de validación secuencial
+  // Funciones de validación secuencial (se mantienen igual)
   const getPasswordFirstError = (password) => {
     if (password.length < 8) return "Mínimo 8 caracteres";
     if (!/[A-Z]/.test(password)) return "Debe contener al menos una mayúscula";
@@ -315,4 +315,5 @@ function RegisterPage() {
 }
 
 export default RegisterPage;
+
 
