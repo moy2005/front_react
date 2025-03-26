@@ -1,231 +1,1127 @@
-/* Advanced Professional IoT Dashboard Styles */
 :root {
-  /* Enhanced Color Palette with Deeper Complexity */
-  --color-background-primary: #0a0e17;
-  --color-background-secondary: #111827;
-  --color-background-tertiary: #1a2333;
-  
-  --color-card-background: rgba(25, 35, 55, 0.85);
-  --color-card-border: rgba(79, 209, 197, 0.1);
-  
-  --color-text-primary: #f4f5f7;
-  --color-text-secondary: #a3b3cc;
-  --color-text-muted: #6b7280;
-  
-  --color-accent-primary: #4fd1c5;
-  --color-accent-secondary: #38b2ac;
-  --color-accent-tertiary: #2c7a7b;
-  
-  --color-gradient-primary: linear-gradient(
-    135deg, 
-    var(--color-accent-primary), 
-    var(--color-accent-secondary)
-  );
-  
-  /* Advanced Shadow and Depth Variables */
-  --shadow-elevated: 0 25px 50px rgba(0, 0, 0, 0.4);
-  --shadow-hover: 0 35px 60px rgba(0, 0, 0, 0.5);
-  --shadow-inner: inset 0 10px 20px rgba(0, 0, 0, 0.2);
-  
-  /* Transition and Animation Variables */
-  --transition-smooth: all 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
-  --transition-bounce: all 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  /* Advanced Color Palette with Semantic Tokens */
+  --color-primary-50: #e8f5e9;
+  --color-primary-100: #c8e6c9;
+  --color-primary-300: #81c784;
+  --color-primary-500: #4caf50;
+  --color-primary-700: #388e3c;
+  --color-primary-900: #1b5e20;
+
+  --color-neutral-50: #f5f5f5;
+  --color-neutral-100: #e0e0e0;
+  --color-neutral-300: #9e9e9e;
+  --color-neutral-500: #757575;
+  --color-neutral-700: #616161;
+  --color-neutral-900: #212121;
+
+  --color-accent-error-500: #f44336;
+  --color-accent-warning-500: #ff9800;
+  --color-accent-info-500: #2196f3;
+
+  /* Advanced Typography Scale */
+  --typography-scale-xs: 0.75rem;
+  --typography-scale-sm: 0.875rem;
+  --typography-scale-base: 1rem;
+  --typography-scale-lg: 1.25rem;
+  --typography-scale-xl: 1.5rem;
+  --typography-scale-2xl: 2rem;
+  --typography-scale-3xl: 2.5rem;
+
+  /* Advanced Spacing System */
+  --spacing-2xs: 0.25rem;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  /* Advanced Shadow Tokens */
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.12);
+  --shadow-medium: 0 3px 6px rgba(0, 0, 0, 0.12), 0 3px 4px rgba(0, 0, 0, 0.16);
+  --shadow-strong: 0 10px 20px rgba(0, 0, 0, 0.15), 0 6px 6px rgba(0, 0, 0, 0.20);
+  --shadow-intense: 0 15px 35px rgba(0, 0, 0, 0.2);
+
+  /* Advanced Transition Tokens */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-medium: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Advanced Border Radius */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-pill: 9999px;
 }
 
-/* Global Advanced Styling */
+
+/* IoT Dashboard - Professional Green & White Theme */
 .IoT-dashboard-container {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
-  background: 
-    radial-gradient(
-      ellipse at top left, 
-      rgba(79, 209, 197, 0.05) 0%, 
-      transparent 50%
-    ),
-    radial-gradient(
-      ellipse at bottom right, 
-      rgba(56, 178, 172, 0.05) 0%, 
-      transparent 50%
-    ),
-    linear-gradient(
-      to bottom right, 
-      var(--color-background-primary), 
-      var(--color-background-secondary)
-    );
-  
-  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, 
-               'Roboto', 'Helvetica Neue', sans-serif;
-  color: var(--color-text-primary);
-  padding: 2.5rem;
-  overflow-x: hidden;
-  perspective: 2500px;
-  line-height: 1.6;
+  background-color: #f7f9f7;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+  padding: 2rem;
+  gap: 2rem;
 }
 
-/* Advanced Scrollbar with Translucent Design */
-.IoT-dashboard-container::-webkit-scrollbar {
-  width: 12px;
-  background: transparent;
-}
 
-.IoT-dashboard-container::-webkit-scrollbar-track {
-  background: rgba(30, 36, 51, 0.5);
-  border-radius: 10px;
-}
 
-.IoT-dashboard-container::-webkit-scrollbar-thumb {
-  background: var(--color-gradient-primary);
-  border-radius: 10px;
-  border: 3px solid rgba(25, 35, 55, 0.5);
-}
-
-/* Ultra-Modern Dashboard Header */
 .IoT-dashboard-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2.5rem;
-  position: relative;
-  z-index: 10;
-  transform-style: preserve-3d;
-  transform: 
-    perspective(2000px) 
-    rotateX(15deg) 
-    translateZ(50px);
-  transition: var(--transition-smooth);
-}
-
-.IoT-dashboard-header::before {
-  content: '';
-  position: absolute;
-  top: -100%;
-  left: -100%;
-  width: 300%;
-  height: 300%;
-  background: 
-    radial-gradient(
-      circle at center, 
-      rgba(79, 209, 197, 0.05) 0%, 
-      transparent 70%
-    );
-  z-index: -1;
-  animation: header-pulse 4s infinite alternate;
-  opacity: 0.7;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .IoT-dashboard-title {
-  font-size: 3.5rem;
-  font-weight: 900;
-  background: var(--color-gradient-primary);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 
-    0 15px 30px rgba(0, 0, 0, 0.3),
-    0 5px 15px rgba(79, 209, 197, 0.2);
-  letter-spacing: -2px;
+  color: #0e713f;
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+  position: relative;
 }
 
-/* Advanced Grid Layout with Complex Positioning */
+.IoT-dashboard-title::after {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #0e713f, #4caf50);
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.IoT-connection-widget {
+  animation: IoT-fadeIn 0.6s ease-out;
+}
+
+.IoT-connection-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(14, 113, 63, 0.1);
+  padding: 1.5rem;
+  border-left: 4px solid #0e713f;
+}
+
+.IoT-card-header {
+  color: #0e713f;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.IoT-connection-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.IoT-connection-status-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.IoT-connection-label {
+  font-weight: 500;
+  color: #333;
+}
+
+.IoT-status-indicator-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.IoT-status-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.IoT-status-indicator.IoT-connected {
+  background-color: #4caf50;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+}
+
+.IoT-status-indicator.IoT-disconnected {
+  background-color: #f44336;
+  box-shadow: 0 0 8px rgba(244, 67, 54, 0.6);
+}
+
+.IoT-connection-text {
+  font-weight: 500;
+}
+
+.IoT-mac-address {
+  font-family: 'Roboto Mono', monospace;
+  background-color: #f0f4f0;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
 .IoT-dashboard-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2.5rem;
-  grid-auto-flow: dense;
-  perspective: 1500px;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+  animation: IoT-staggeredFadeIn 0.8s ease-out;
 }
 
-/* Ultra-Advanced Card Design */
-.IoT-metric-card, 
-.IoT-control-card {
-  background: var(--color-card-background);
-  border-radius: 2rem;
-  padding: 2.5rem;
+.IoT-metric-card, .IoT-control-card {
+  height: 100%;
+  animation: IoT-pulseIn 0.5s ease-out;
+}
+
+.IoT-card-content {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(14, 113, 63, 0.1);
+  padding: 1.5rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  border-top: 4px solid #4caf50;
+}
+
+.IoT-card-content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(14, 113, 63, 0.15);
+}
+
+.IoT-card-content.IoT-disabled {
+  opacity: 0.7;
+  filter: grayscale(30%);
+  cursor: not-allowed;
+}
+
+.IoT-card-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.IoT-card-title h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #0e713f;
+}
+
+.IoT-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.IoT-metric-value {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #0e713f;
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.IoT-unit {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #666;
+  margin-left: 0.25rem;
+}
+
+.IoT-progress-container {
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 0.5rem 0;
+}
+
+.IoT-progress-bar {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.5s ease-out;
+}
+
+.IoT-progress-bar.IoT-status-optimal {
+  background: linear-gradient(90deg, #4caf50, #8bc34a);
+}
+
+.IoT-progress-bar.IoT-status-low {
+  background: linear-gradient(90deg, #ffeb3b, #ffc107);
+}
+
+.IoT-progress-bar.IoT-status-high {
+  background: linear-gradient(90deg, #ff9800, #f44336);
+}
+
+.IoT-progress-bar.IoT-status-unknown {
+  background: linear-gradient(90deg, #9e9e9e, #607d8b);
+}
+
+.IoT-metric-status {
+  display: flex;
+  justify-content: center;
+}
+
+.IoT-status-badge {
+  padding: 0.3rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.IoT-status-badge.IoT-status-optimal {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+}
+
+.IoT-status-badge.IoT-status-low {
+  background-color: #fff8e1;
+  color: #ff8f00;
+  border: 1px solid #ffe082;
+}
+
+.IoT-status-badge.IoT-status-high {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+}
+
+.IoT-status-badge.IoT-status-unknown {
+  background-color: #eceff1;
+  color: #455a64;
+  border: 1px solid #b0bec5;
+}
+
+.IoT-control-status {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.IoT-control-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.IoT-button {
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+}
+
+.IoT-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.IoT-button:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.IoT-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.IoT-button-primary {
+  background: linear-gradient(135deg, #4caf50, #0e713f);
+  color: white;
+}
+
+.IoT-button-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #43a047, #0a5f34);
+}
+
+.IoT-button-danger {
+  background: linear-gradient(135deg, #f44336, #c62828);
+  color: white;
+}
+
+.IoT-button-danger:hover:not(:disabled) {
+  background: linear-gradient(135deg, #e53935, #b71c1c);
+}
+
+.IoT-button-text {
+  white-space: nowrap;
+}
+
+.IoT-command-info {
+  font-size: 0.9rem;
+  color: #666;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.IoT-command-value {
+  font-family: 'Roboto Mono', monospace;
+  background-color: #f0f4f0;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  color: #0e713f;
+  font-weight: 500;
+}
+
+
+.IoT-icon-thermometer,
+.IoT-icon-humidity,
+.IoT-icon-soil,
+.IoT-icon-window,
+.IoT-icon-fan,
+.IoT-icon-irrigation {
+  width: 48px;
+  height: 48px;
+  margin-right: 12px;
+}
+
+/* Thermometer Icon - Advanced */
+.IoT-icon-thermometer {
+  position: relative;
+  width: 24px;
+  height: 42px;
+  margin-right: 8px;
+}
+
+.IoT-thermometer-stem {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 32px;
+  background-color: #e0e0e0;
+  border-radius: 4px 4px 0 0;
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.IoT-thermometer-bulb {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(135deg, #e0e0e0, #d0d0d0);
+  border-radius: 50%;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.IoT-thermometer-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to top, #ff5252, #ff7b7b);
+  border-radius: 0 0 4px 4px;
+  transition: height 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Add pulse animation to the bulb when temperature is high */
+@keyframes IoT-thermometer-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 82, 82, 0.7); }
+  70% { box-shadow: 0 0 0 8px rgba(255, 82, 82, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 82, 82, 0); }
+}
+
+.IoT-status-high .IoT-thermometer-bulb {
+  animation: IoT-thermometer-pulse 2s infinite;
+}
+
+/* Humidity Icon - Advanced Droplet */
+.IoT-icon-humidity {
+  position: relative;
+  width: 32px;
+  height: 42px;
+  margin-right: 8px;
+}
+
+.IoT-humidity-drop {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 32px;
+  background: linear-gradient(135deg, #64b5f6, #1976d2);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  box-shadow: 0 3px 6px rgba(25, 118, 210, 0.3);
+  transform-origin: center bottom;
+  animation: IoT-humidity-wobble 6s ease-in-out infinite;
+}
+
+.IoT-humidity-drop::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 25%;
+  width: 35%;
+  height: 35%;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  transform: rotate(-45deg);
+}
+
+.IoT-humidity-waves {
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.IoT-humidity-wave {
+  position: absolute;
+  bottom: 0;
+  width: 30px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: rgba(25, 118, 210, 0.3);
+  animation: IoT-humidity-ripple 2s infinite;
+}
+
+.IoT-humidity-wave:nth-child(2) {
+  width: 22px;
+  animation-delay: 0.5s;
+}
+
+@keyframes IoT-humidity-wobble {
+  0%, 100% { transform: translateX(-50%) translateY(0) scale(1); }
+  50% { transform: translateX(-50%) translateY(-5%) scale(0.95); }
+}
+
+@keyframes IoT-humidity-ripple {
+  0% { transform: scale(0.8); opacity: 0.7; }
+  50% { transform: scale(1.1); opacity: 0.3; }
+  100% { transform: scale(0.8); opacity: 0.7; }
+}
+
+/* Soil Moisture Icon - Advanced */
+.IoT-icon-soil {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  margin-right: 8px;
+}
+
+.IoT-soil-surface {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 16px;
+  background: linear-gradient(to bottom, #8d6e63, #6d4c41);
+  border-radius: 6px 6px 12px 12px;
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.IoT-soil-surface::before,
+.IoT-soil-surface::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 3px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+}
+
+.IoT-soil-surface::before {
+  top: 5px;
+  left: 8px;
+}
+
+.IoT-soil-surface::after {
+  top: 9px;
+  right: 12px;
+}
+
+.IoT-plant-stem {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 18px;
+  background: linear-gradient(to top, #4caf50, #66bb6a);
+  border-radius: 2px;
+}
+
+.IoT-plant-leaf {
+  position: absolute;
+  width: 15px;
+  height: 10px;
+  background: linear-gradient(135deg, #4caf50, #81c784);
+  border-radius: 10px 0;
+  transform-origin: center bottom;
+  animation: IoT-leaf-sway 5s ease-in-out infinite alternate;
+}
+
+.IoT-plant-leaf-left {
+  top: 10px;
+  left: calc(50% - 15px);
+  transform: rotate(-40deg);
+  animation-delay: 0.5s;
+}
+
+.IoT-plant-leaf-right {
+  top: 15px;
+  right: calc(50% - 15px);
+  transform: rotate(40deg);
+  animation-delay: 1s;
+}
+
+@keyframes IoT-leaf-sway {
+  0% { transform: rotate(-40deg) scale(1); }
+  100% { transform: rotate(-30deg) scale(1.05); }
+}
+
+@keyframes IoT-leaf-sway-right {
+  0% { transform: rotate(40deg) scale(1); }
+  100% { transform: rotate(30deg) scale(1.05); }
+}
+
+.IoT-plant-leaf-right {
+  animation: IoT-leaf-sway-right 5s ease-in-out infinite alternate;
+}
+
+/* Window Icon - Advanced */
+.IoT-icon-window {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  margin-right: 8px;
+}
+
+.IoT-window-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 3px solid #78909c;
+  border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  background: #cfd8dc;
+}
+
+.IoT-window-glass {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  right: 3px;
+  bottom: 3px;
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  border-radius: 1px;
+}
+
+.IoT-window-handle {
+  position: absolute;
+  bottom: 7px;
+  right: 7px;
+  width: 8px;
+  height: 8px;
+  background: #455a64;
+  border-radius: 50%;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  transform-origin: center center;
+  transition: transform 0.5s ease;
+}
+
+.IoT-window-glass::before,
+.IoT-window-glass::after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.IoT-window-glass::before {
+  top: 0;
+  left: 50%;
+  height: 100%;
+  width: 1px;
+}
+
+.IoT-window-glass::after {
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+}
+
+/* Fan Icon - Advanced */
+.IoT-icon-fan {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  margin-right: 8px;
+}
+
+.IoT-fan-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background: radial-gradient(circle, #78909c, #455a64);
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+.IoT-fan-blades {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  animation: IoT-fan-rotate 3s linear infinite;
+}
+
+.IoT-fan-blade {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 8px;
+  background: linear-gradient(90deg, #90a4ae, #607d8b);
+  border-radius: 50% 30% 30% 50%;
+  transform-origin: left center;
+}
+
+.IoT-fan-blade-1 {
+  transform: translateY(-50%) rotate(0deg);
+}
+
+.IoT-fan-blade-2 {
+  transform: translateY(-50%) rotate(120deg);
+}
+
+.IoT-fan-blade-3 {
+  transform: translateY(-50%) rotate(240deg);
+}
+
+@keyframes IoT-fan-rotate {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Make fan rotate faster when active */
+.IoT-status-true .IoT-fan-blades {
+  animation-duration: 0.8s;
+}
+
+/* Irrigation Icon - Advanced Sprinkler */
+.IoT-icon-irrigation {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  margin-right: 8px;
+}
+
+.IoT-irrigation-sprinkler {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.IoT-sprinkler-head {
+  position: absolute;
+  top: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 10px;
+  background: linear-gradient(to bottom, #9e9e9e, #757575);
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.IoT-sprinkler-base {
+  position: absolute;
+  top: 13px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 22px;
+  background: linear-gradient(to bottom, #9e9e9e, #757575);
+  border-radius: 2px;
+}
+
+.IoT-water-drops {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.IoT-water-drop {
+  position: absolute;
+  width: 6px;
+  height: 10px;
+  background: linear-gradient(to bottom, #64b5f6, #2196f3);
+  border-radius: 4px 4px 6px 6px;
+  opacity: 0;
+  filter: drop-shadow(0 3px 2px rgba(33, 150, 243, 0.4));
+}
+
+.IoT-water-drop-1 {
+  left: 20%;
+  top: 0;
+  animation: IoT-water-falling 1.2s linear infinite;
+}
+
+.IoT-water-drop-2 {
+  left: 50%;
+  top: -4px;
+  animation: IoT-water-falling 1.2s linear 0.4s infinite;
+}
+
+.IoT-water-drop-3 {
+  left: 80%;
+  top: -8px;
+  animation: IoT-water-falling 1.2s linear 0.8s infinite;
+}
+
+@keyframes IoT-water-falling {
+  0% {
+    transform: translateY(0) scaleY(1.2);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(20px) scaleY(0.8);
+    opacity: 0;
+  }
+}
+
+/* ===== ADVANCED UI COMPONENTS ===== */
+
+/* Enhanced Slider */
+.IoT-slider-container {
+  position: relative;
+  width: 100%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.IoT-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(to right, #e0e0e0 0%, #e0e0e0 100%);
+  border-radius: 4px;
+  outline: none;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s;
+}
+
+.IoT-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4caf50, #0e713f);
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.IoT-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4caf50, #0e713f);
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.IoT-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.5);
+}
+
+.IoT-slider::-moz-range-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.5);
+}
+
+.IoT-slider::-webkit-slider-runnable-track {
+  border-radius: 4px;
+  height: 8px;
+}
+
+.IoT-slider::-moz-range-track {
+  border-radius: 4px;
+  height: 8px;
+}
+
+/* Dynamic slider fill based on value */
+.IoT-slider::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #4caf50 0%, #4caf50 var(--slider-percent, 50%), #e0e0e0 var(--slider-percent, 50%));
+}
+
+/* Speed Label */
+.IoT-speed-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #424242;
+}
+
+.IoT-speed-label::after {
+  content: attr(data-value);
+  font-weight: 600;
+  color: #0e713f;
+}
+
+/* Enhanced Buttons with Ripple Effect */
+.IoT-button {
   position: relative;
   overflow: hidden;
-  border: 1px solid var(--color-card-border);
-  backdrop-filter: blur(20px) saturate(180%);
-  transform-style: preserve-3d;
-  transition: var(--transition-bounce);
-  box-shadow: 
-    var(--shadow-elevated),
-    var(--shadow-inner);
-  
-  /* Pseudo-element for advanced hover effect */
-  &::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: 
-      radial-gradient(
-        circle at center, 
-        rgba(79, 209, 197, 0.05) 0%, 
-        transparent 70%
-      );
-    z-index: 1;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.IoT-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.7);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%, -50%);
+  transform-origin: 50% 50%;
+}
+
+.IoT-button:active::after {
+  animation: IoT-ripple 0.4s ease-out;
+}
+
+@keyframes IoT-ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(20, 20);
     opacity: 0;
-    transition: opacity 0.6s ease;
+  }
+}
+
+/* ===== ANIMATIONS AND EFFECTS ===== */
+
+@keyframes IoT-fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes IoT-pulseIn {
+  0% { opacity: 0; transform: scale(0.95); }
+  70% { opacity: 1; transform: scale(1.02); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes IoT-staggeredFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Apply staggered animation to cards */
+.IoT-metric-card:nth-child(1) { animation-delay: 0.1s; }
+.IoT-metric-card:nth-child(2) { animation-delay: 0.2s; }
+.IoT-metric-card:nth-child(3) { animation-delay: 0.3s; }
+.IoT-control-card:nth-child(4) { animation-delay: 0.4s; }
+.IoT-control-card:nth-child(5) { animation-delay: 0.5s; }
+.IoT-control-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* ===== DATA VISUALIZATION ENHANCEMENTS ===== */
+
+/* Enhanced Progress bars with animated gradient */
+.IoT-progress-bar.IoT-status-optimal {
+  background: linear-gradient(90deg, #4caf50, #8bc34a);
+  background-size: 200% 100%;
+  animation: IoT-gradient-shift 3s ease infinite;
+}
+
+.IoT-progress-bar.IoT-status-low {
+  background: linear-gradient(90deg, #ffeb3b, #ffc107);
+  background-size: 200% 100%;
+  animation: IoT-gradient-shift 3s ease infinite;
+}
+
+.IoT-progress-bar.IoT-status-high {
+  background: linear-gradient(90deg, #ff9800, #f44336);
+  background-size: 200% 100%;
+  animation: IoT-gradient-shift 3s ease infinite;
+}
+
+@keyframes IoT-gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===== MEDIA QUERIES FOR RESPONSIVENESS ===== */
+
+@media (max-width: 768px) {
+  .IoT-dashboard-container {
+    padding: 1rem;
+    gap: 1rem;
   }
   
-  &:hover {
-    transform: 
-      perspective(1200px) 
-      rotateX(7deg) 
-      rotateY(-7deg) 
-      translateZ(75px);
-    box-shadow: 
-      var(--shadow-hover),
-      0 0 50px rgba(79, 209, 197, 0.2);
-    
-    &::before {
-      opacity: 1;
-    }
-  }
-}
-
-/* Advanced Interaction and Animation Elements */
-@keyframes header-pulse {
-  0% { transform: scale(1) rotate(0deg); }
-  100% { 
-    transform: 
-      scale(1.03) 
-      rotate(2deg); 
-  }
-}
-
-@keyframes status-pulse {
-  0% { 
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(72, 187, 120, 0.4);
-  }
-  100% { 
-    transform: scale(1.2);
-    box-shadow: 0 0 0 15px rgba(72, 187, 120, 0);
-  }
-}
-
-/* Responsive Enhancements with Advanced Media Queries */
-@media screen and (max-width: 1440px) {
-  .IoT-dashboard-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  }
-}
-
-@media screen and (max-width: 768px) {
   .IoT-dashboard-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  
-  .IoT-dashboard-header {
-    flex-direction: column;
-    align-items: flex-start;
-    transform: none;
   }
   
   .IoT-dashboard-title {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
+  }
+  
+  .IoT-card-content {
+    padding: 1rem;
+  }
+  
+  .IoT-metric-value {
+    font-size: 1.8rem;
+  }
+  
+  .IoT-control-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .IoT-button {
+    width: 100%;
+    margin-bottom: 0.5rem;
   }
 }
+
+/* ===== LIGHT/DARK MODE SUPPORT ===== */
+
+@media (prefers-color-scheme: dark) {
+  .IoT-dashboard-container {
+    background-color: #121212;
+  }
+  
+  .IoT-card-content, .IoT-connection-card {
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  }
+  
+  .IoT-dashboard-title, .IoT-card-header, .IoT-card-title h3 {
+    color: #4caf50;
+  }
+  
+  .IoT-connection-label, .IoT-control-status {
+    color: #e0e0e0;
+  }
+  
+  .IoT-mac-address, .IoT-command-value {
+    background-color: #2a2a2a;
+    color: #81c784;
+  }
+  
+  .IoT-progress-container {
+    background-color: #333333;
+  }
+  
+  .IoT-metric-value {
+    color: #81c784;
+  }
+  
+  .IoT-unit, .IoT-command-info {
+    color: #aaaaaa;
+  }
+  
+  .IoT-status-badge.IoT-status-optimal {
+    background-color: rgba(46, 125, 50, 0.2);
+    color: #81c784;
+    border-color: #2e7d32;
+  }
+  
+  .IoT-status-badge.IoT-status-low {
+    background-color: rgba(255, 143, 0, 0.2);
+    color: #ffb74d;
+    border-color: #ff8f00;
+  }
+  
+  .IoT-status-badge.IoT-status-high {
+    background-color: rgba(198, 40, 40, 0.2);
+    color: #ef9a9a;
+    border-color: #c62828;
+  }
+}
+
+/* ===== HOVER AND INTERACTION EFFECTS ===== */
+
+/* Card hover effects */
+.IoT-card-content:hover .IoT-card-title h3 {
+  transform: translateY(-2px);
+  transition: transform 0.3s ease;
+}
+
+/* Button hover glow effect */
+.IoT-button-primary:hover:not(:disabled) {
+  box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+}
+
+.IoT-button-danger:hover:not(:disabled) {
+  box-shadow: 0 5px 15px rgba(244, 67, 54, 0.4);
+}
+
+/* Interactive water drops for irrigation when active */
+.IoT-status-true .IoT-water-drop {
+  opacity: 0.9;
+}
+
+/* Interactive wind speed animation for fan based on slider value */
+.IoT-fan-blades {
+  animation-duration: calc(3s - (var(--fan-speed, 0) * 0.01s));
+}
+
