@@ -1,0 +1,394 @@
+/* Main container */
+.vetcare-politicas-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+    background-color: #f9fbfa;
+    min-height: 100vh;
+  }
+  
+  /* Header styles */
+  .vetcare-politicas-header {
+    background: linear-gradient(135deg, #2a7d4f 0%, #5fb27d 100%);
+    border-radius: 0 0 20px 20px;
+    padding: 60px 40px;
+    margin-bottom: 60px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(42, 125, 79, 0.2);
+  }
+  
+  .vetcare-header-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .vetcare-main-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 15px;
+    line-height: 1.2;
+  }
+  
+  .vetcare-title-highlight {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .vetcare-title-highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.3);
+    z-index: -1;
+    border-radius: 6px;
+    transform: rotate(-1deg);
+  }
+  
+  .vetcare-header-description {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  
+  /* Header decorations */
+  .vetcare-header-decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  .vetcare-decoration-leaf {
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.1;
+  }
+  
+  .vetcare-leaf-1 {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='white' d='M413.97 183.45c-28.24-11.74-54.62-15.03-78.93-8.05-3.29.95-6.41 2.05-9.36 3.28-9.12-31.28-23.3-57.78-41.62-77.97C265.38 90.48 242.48 80 216.55 80c-31.35 0-59.31 14.83-79.45 42.76-20.14 27.93-30.34 66.62-30.34 113.72 0 31.63 5.52 62.76 16.55 93.38C75.72 368.69 48 409.31 48 448c0 19.01 5.71 35.52 17.1 49.58 6.48 8.05 15.01 12.42 25.9 12.42 8.62 0 16.14-2.76 22.62-8.28 17.72-15.34 30.48-35.58 38.07-60.62 7.6-25.03 10.96-52.14 10.96-80.69 0-34.07-4.81-65.93-14.34-94.76-1.84-5.52-2.76-10.43-2.76-14.76 0-8.43 2.3-15.15 6.9-20.14 4.6-4.98 10.81-7.47 18.62-7.47 9.31 0 17.58 4.04 24.83 12.14 7.24 8.09 13.72 20.22 19.45 36.41 5.72 16.19 9.81 35.44 12.27 57.72 2.47 22.28 3.44 45.58 2.9 69.9-.38 16.76-1.33 33.21-2.9 49.38-1.56 16.17-3.62 30.93-6.21 44.28-2.58 13.35-5.9 25.3-9.93 35.86-4.03 10.56-8.38 18.59-13.1 24.14-4.71 5.55-10.29 8.33-16.72 8.33-4.79 0-8.57-1.43-11.31-4.28-2.75-2.86-4.12-6.76-4.12-11.72 0-10.66 6.19-24.5 18.55-41.52 12.37-17.02 27.86-36.93 46.48-59.72 18.62-22.79 38.1-46.93 58.45-72.41 20.36-25.49 38.64-49.78 54.86-72.9 16.21-23.11 29.26-44.64 39.14-64.55 9.88-19.92 14.81-36.78 14.81-50.62 0-11.06-3.1-19.54-9.31-25.45-6.21-5.92-14.91-8.88-26.1-8.88z'%3E%3C/path%3E%3C/svg%3E");
+    width: 150px;
+    height: 150px;
+    top: -30px;
+    left: -30px;
+    transform: rotate(45deg);
+  }
+  
+  .vetcare-leaf-2 {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='white' d='M413.97 183.45c-28.24-11.74-54.62-15.03-78.93-8.05-3.29.95-6.41 2.05-9.36 3.28-9.12-31.28-23.3-57.78-41.62-77.97C265.38 90.48 242.48 80 216.55 80c-31.35 0-59.31 14.83-79.45 42.76-20.14 27.93-30.34 66.62-30.34 113.72 0 31.63 5.52 62.76 16.55 93.38C75.72 368.69 48 409.31 48 448c0 19.01 5.71 35.52 17.1 49.58 6.48 8.05 15.01 12.42 25.9 12.42 8.62 0 16.14-2.76 22.62-8.28 17.72-15.34 30.48-35.58 38.07-60.62 7.6-25.03 10.96-52.14 10.96-80.69 0-34.07-4.81-65.93-14.34-94.76-1.84-5.52-2.76-10.43-2.76-14.76 0-8.43 2.3-15.15 6.9-20.14 4.6-4.98 10.81-7.47 18.62-7.47 9.31 0 17.58 4.04 24.83 12.14 7.24 8.09 13.72 20.22 19.45 36.41 5.72 16.19 9.81 35.44 12.27 57.72 2.47 22.28 3.44 45.58 2.9 69.9-.38 16.76-1.33 33.21-2.9 49.38-1.56 16.17-3.62 30.93-6.21 44.28-2.58 13.35-5.9 25.3-9.93 35.86-4.03 10.56-8.38 18.59-13.1 24.14-4.71 5.55-10.29 8.33-16.72 8.33-4.79 0-8.57-1.43-11.31-4.28-2.75-2.86-4.12-6.76-4.12-11.72 0-10.66 6.19-24.5 18.55-41.52 12.37-17.02 27.86-36.93 46.48-59.72 18.62-22.79 38.1-46.93 58.45-72.41 20.36-25.49 38.64-49.78 54.86-72.9 16.21-23.11 29.26-44.64 39.14-64.55 9.88-19.92 14.81-36.78 14.81-50.62 0-11.06-3.1-19.54-9.31-25.45-6.21-5.92-14.91-8.88-26.1-8.88z'%3E%3C/path%3E%3C/svg%3E");
+    width: 200px;
+    height: 200px;
+    bottom: -50px;
+    right: -50px;
+    transform: rotate(220deg);
+  }
+  
+  .vetcare-decoration-paw {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='white' d='M256 244c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-122-90c18.1 0 32.9-14.8 32.9-32.9s-14.8-32.9-32.9-32.9-32.9 14.8-32.9 32.9 14.7 32.9 32.9 32.9zm244 0c18.1 0 32.9-14.8 32.9-32.9s-14.8-32.9-32.9-32.9-32.9 14.8-32.9 32.9 14.7 32.9 32.9 32.9zm-196 0c18.1 0 32.9-14.8 32.9-32.9s-14.8-32.9-32.9-32.9-32.9 14.8-32.9 32.9 14.7 32.9 32.9 32.9zm148 0c18.1 0 32.9-14.8 32.9-32.9s-14.8-32.9-32.9-32.9-32.9 14.8-32.9 32.9 14.7 32.9 32.9 32.9z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    top: 50%;
+    left: 20%;
+    transform: translateY(-50%) rotate(15deg);
+    opacity: 0.15;
+  }
+  
+  /* Empty state styles */
+  .vetcare-empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    max-width: 500px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .vetcare-empty-icon-container {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 30px;
+  }
+  
+  .vetcare-empty-icon {
+    font-size: 3rem;
+    color: #2a7d4f;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .vetcare-empty-icon-shadow {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-color: rgba(42, 125, 79, 0.1);
+    border-radius: 50%;
+    top: 10px;
+    left: 10px;
+    z-index: 1;
+  }
+  
+  .vetcare-empty-title {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  
+  .vetcare-empty-message {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+  }
+  
+  /* Policies grid */
+  .vetcare-politicas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+  }
+  
+  /* Policy card styles */
+  .vetcare-politica-card {
+    background-color: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .vetcare-politica-card.hovered {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  .vetcare-politica-card.active {
+    box-shadow: 0 15px 30px rgba(42, 125, 79, 0.15);
+  }
+  
+  .vetcare-card-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(42, 125, 79, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .vetcare-politica-card.hovered .vetcare-card-glow {
+    opacity: 1;
+  }
+  
+  .vetcare-card-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid transparent;
+    border-radius: 16px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .vetcare-politica-card.active .vetcare-card-border {
+    border-color: rgba(42, 125, 79, 0.3);
+  }
+  
+  .vetcare-card-content {
+    padding: 25px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .vetcare-card-header {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+  }
+  
+  .vetcare-card-icon {
+    position: relative;
+    margin-right: 15px;
+    flex-shrink: 0;
+  }
+  
+  .vetcare-card-icon i {
+    font-size: 1.5rem;
+    color: white;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .vetcare-icon-circle {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #2a7d4f, #5fb27d);
+    border-radius: 50%;
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    z-index: 1;
+  }
+  
+  .vetcare-card-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    line-height: 1.3;
+    flex-grow: 1;
+  }
+  
+  .vetcare-card-description {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  
+  .vetcare-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .vetcare-date-info {
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #888;
+  }
+  
+  .vetcare-date-info i {
+    margin-right: 5px;
+    color: #5fb27d;
+  }
+  
+  .vetcare-accordion-indicator {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgba(42, 125, 79, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2a7d4f;
+    transition: all 0.3s ease;
+  }
+  
+  .vetcare-politica-card.active .vetcare-accordion-indicator {
+    background-color: rgba(42, 125, 79, 0.2);
+    transform: rotate(180deg);
+  }
+  
+  /* Accordion content */
+  .vetcare-accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  
+  .vetcare-accordion-content.expanded {
+    max-height: 500px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+  }
+  
+  .vetcare-policy-details h4 {
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  
+  .vetcare-policy-fulltext {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  .vetcare-policy-meta {
+    background-color: #f5faf7;
+    border-radius: 10px;
+    padding: 15px;
+  }
+  
+  .vetcare-meta-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #555;
+    margin-bottom: 8px;
+  }
+  
+  .vetcare-meta-item:last-child {
+    margin-bottom: 0;
+  }
+  
+  .vetcare-meta-item i {
+    margin-right: 8px;
+    color: #5fb27d;
+    width: 16px;
+    text-align: center;
+  }
+  
+  .vetcare-meta-item strong {
+    font-weight: 600;
+    margin-right: 5px;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .vetcare-politicas-header {
+      padding: 40px 20px;
+    }
+    
+    .vetcare-main-title {
+      font-size: 2.2rem;
+    }
+    
+    .vetcare-header-description {
+      font-size: 1rem;
+    }
+    
+    .vetcare-politicas-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .vetcare-main-title {
+      font-size: 1.8rem;
+    }
+    
+    .vetcare-card-content {
+      padding: 20px;
+    }
+  }

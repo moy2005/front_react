@@ -173,6 +173,11 @@
   flex: 1;
 }
 
+.contactPage__locations a {
+  text-decoration: none;
+  color: inherit; /* Hereda el color del texto normal */
+}
+
 .contactPage__locationDetails h3 {
   margin: 0 0 0.5rem 0;
   font-size: 1.2rem;

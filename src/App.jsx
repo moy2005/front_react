@@ -60,6 +60,8 @@ import RedesSocialesList from './pages/admin/RedesSocialesList.jsx';
 import PreguntasFrecuentes from './pages/publica/PreguntasFrecuentes.jsx';
 import HistorialAcciones from './pages/client/HistorialAcciones.jsx';
 import Breadcrumbs from './pages/Breadcrumbs.jsx';
+import PoliticasPage from './pages/publica/PoliticasPage.jsx';
+import MapaPage from './pages/publica/MapaPage.jsx';
 
 function App() {
   return (
@@ -91,7 +93,9 @@ function App() {
                           <Route path="/offers" element={<OffersPage />} />
                           <Route path="/nosotros" element={<Nosotros />} />
                           <Route path="/public/preguntasFre" element={<PreguntasFrecuentes />} />
-
+                          <Route path="/politicas" element={<PoliticasPage />} />
+                          <Route path="/mapa" element={<MapaPage />} />
+                          
                           {/* 📌 Autenticación */}
                           <Route path="/login" element={<LoginPage />} />
                           <Route path="/register" element={<RegisterPage />} />

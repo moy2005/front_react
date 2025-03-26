@@ -347,6 +347,7 @@ function Navbar() {
                 </div>
               </li>
             <li><Link to="/nosotros" onClick={() => setIsMenuOpen(false)}>Empresa</Link></li>
+            <li><Link to="/politicas" onClick={() => setIsMenuOpen(false)}>Politicas</Link></li>
 
 
             {/* Only show admin links in the mobile menu (desktop uses dropdown in header) */}

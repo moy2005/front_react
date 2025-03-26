@@ -12,8 +12,19 @@ const Inicio = () => {
     const navigation = useNavigate();
     
     if (loading) {
-        return <p className='loading'>Cargando dispositivos...</p>;
-    }
+        return (
+          <div className="loading-container">
+            <div className="wrapper">
+              <div className="circle"></div>
+              <div className="circle"></div>
+              <div className="circle"></div>
+              <div className="shadow"></div>
+              <div className="shadow"></div>
+              <div className="shadow"></div>
+            </div>
+          </div>
+        );
+      }
     
     // Función para determinar el icono según el tipo de dispositivo
     const getIcon = (tipo) => {

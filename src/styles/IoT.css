@@ -66,7 +66,83 @@
   gap: 2rem;
 }
 
+/* Icono de historial personalizado */
+.IoT-icon-history {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
 
+.IoT-history-circle {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #2a7d4f;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+}
+
+.IoT-history-arrow {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid #2a7d4f;
+  border-bottom: 2px solid #2a7d4f;
+  transform: rotate(45deg);
+  top: 6px;
+  left: 6px;
+}
+
+/* Texto del botón */
+.IoT-button-text {
+  position: relative;
+  top: 1px; /* Ajuste fino de alineación */
+}
+
+.IoT-history-button-container {
+  margin: 20px 0;
+  text-align: center;
+}
+
+/* Estilos base del botón/link */
+.IoT-button.IoT-button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background-color: #f0f7f4;
+  color: #2a7d4f;
+  border: 2px solid #2a7d4f;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Efecto hover */
+.IoT-button.IoT-button-secondary:hover {
+  background-color: #e0f0e9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Efecto active */
+.IoT-button.IoT-button-secondary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Icono del botón */
+.IoT-button-icon {
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .IoT-dashboard-header {
   display: flex;
