@@ -46,17 +46,39 @@ const UserDashboard = () => {
     }
   };
 
-  // Usar un intervalo para obtener los datos cada 2 segundos
+  // Usar un intervalo para obtener los datos cada minuto
   useEffect(() => {
-    if (!macAddress) return;
+    if (!macAddress) return; // Si no hay macAddress, no hacer nada
 
     obtenerDatosSensores(); // Inicializa la obtención de datos al montar el componente
 
     const intervalId = setInterval(() => {
-      obtenerDatosSensores(); // Actualiza los datos cada 2 segundos
+      obtenerDatosSensores(); // Actualiza los datos cada 1 minuto (2000 ms)
     }, 2000);
 
-    return () => clearInterval(intervalId);
+    return () => clearInterval(intervalId); // Limpiar el intervalo cuando el componente se desmonte
+  }, [macAddress]); // Añadimos macAddress como dependencia
+
+  // Configurar una suscripción a cambios en la base de datos
+  useEffect(() => {
+    if (!macAddress) return;
+
+    // Establecer WebSocket o EventSource para escuchar cambios en la BD
+    const eventSource = new EventSource(`/api/device-updates/${macAddress}`);
+
+    eventSource.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+
+      // Si hay cambios en los datos, actualizar el estado
+      if (data.updated) {
+        obtenerDatosSensores();
+      }
+    };
+
+    return () => {
+      // Cerrar la conexión cuando el componente se desmonte
+      eventSource.close();
+    };
   }, [macAddress]);
 
   // Configuración de MQTT
@@ -72,11 +94,12 @@ const UserDashboard = () => {
       clean: true,
       reconnectPeriod: 1000,
       connectTimeout: 30 * 1000,
-      rejectUnauthorized: false,
-      protocol: 'wss'
+      // Añade estas opciones para conexiones seguras:
+      rejectUnauthorized: false, // Solo para desarrollo (no usar en producción)
+      protocol: 'wss' // Fuerza el protocolo seguro
     };
 
-    const url = "wss://raba7554.ala.dedicated.aws.emqxcloud.com:8084/mqtt";
+    const url = "ws://raba7554.ala.dedicated.aws.emqxcloud.com:8084/mqtt";
     client.current = MQTT.connect(url, mqttOptions);
 
     client.current.on("connect", () => {
@@ -88,6 +111,8 @@ const UserDashboard = () => {
         `mi/topico/riego/${macAddress}`,
         `mi/topico/ventilador/${macAddress}`,
         `mi/topico/ventilador/speed/${macAddress}`,
+        // Añadir un topic para escuchar actualizaciones de la BD
+        `mi/topico/database-updates/${macAddress}`,
       ];
 
       topics.forEach((topic) => {
@@ -107,10 +132,29 @@ const UserDashboard = () => {
     });
 
     client.current.on("message", (topic, message) => {
-      console.log(`📨 Mensaje recibido en tema ${topic}: ${message.toString()}`);
-      
-      // Actualizar el estado local cuando llegan mensajes MQTT
-      obtenerDatosSensores();
+      console.log(
+        `📨 Mensaje recibido en tema ${topic}: ${message.toString()}`
+      );
+
+      if (topic.includes("servo")) {
+        setLastCommands((prev) => ({ ...prev, servo: message.toString() }));
+        obtenerDatosSensores(); // Actualizar cuando cambia el estado del servo
+      } else if (topic.includes("riego")) {
+        setLastCommands((prev) => ({ ...prev, riego: message.toString() }));
+        obtenerDatosSensores(); // Actualizar cuando cambia el estado del riego
+      } else if (topic.includes("speed")) {
+        setLastCommands((prev) => ({ ...prev, velocidad: message.toString() }));
+        obtenerDatosSensores(); // Actualizar cuando cambia la velocidad
+      } else if (topic.includes("ventilador") && !topic.includes("speed")) {
+        setLastCommands((prev) => ({
+          ...prev,
+          ventilador: message.toString(),
+        }));
+        obtenerDatosSensores(); // Actualizar cuando cambia el estado del ventilador
+      } else if (topic.includes("database-updates")) {
+        // Actualizar cuando hay cambios en la base de datos
+        obtenerDatosSensores();
+      }
     });
 
     client.current.on("offline", () => {
@@ -128,89 +172,138 @@ const UserDashboard = () => {
         client.current.end();
       }
     };
-  }, [macAddress]);
+  }, [macAddress]); // `macAddress` es necesario para MQTT
 
-  // Función para actualizar el estado en la BD y enviar comando MQTT
-  const actualizarEstado = async (tipo, nuevoEstado) => {
+  // Función para registrar acción en el historial
+  const registrarAccion = async (tipoAccion, estadoAnterior, estadoNuevo) => {
     try {
-      // Primero obtener el último estado para asegurarnos de tener todos los campos
-      const { data: estadoActual } = await instance.get(
-        `/estado-dispositivo/${macAddress}/ultimo`
-      );
-  
-      // Preparar el payload con todos los campos actuales + el cambio
-      const payload = {
-        macAddress, // Asegurarse de incluir la MAC
-        ...estadoActual, // Mantener todos los valores actuales
-        [tipo === "ventana" ? "ventanaAbierta" : 
-         tipo === "riego" ? "riegoActivo" : 
-         "ventiladorActivo"]: nuevoEstado
-      };
-  
-      // Enviar la actualización (POST al endpoint sin parámetro en la URL)
-      const response = await instance.post('/estado-dispositivo', payload);
-      
-      // Luego enviar el comando MQTT según el estado
-      let topic, mensaje;
-      
-      if (tipo === "ventana") {
-        topic = `mi/topico/servo/${macAddress}`;
-        mensaje = nuevoEstado ? "abrir" : "cerrar";
-      } else if (tipo === "riego") {
-        topic = `mi/topico/riego/${macAddress}`;
-        mensaje = nuevoEstado ? "activar" : "desactivar";
-      } else if (tipo === "ventilador") {
-        topic = `mi/topico/ventilador/${macAddress}`;
-        mensaje = nuevoEstado ? "encender" : "apagar";
-      }
-  
-      if (client.current && mqttConnected) {
-        client.current.publish(topic, mensaje, { qos: 1 }, (error) => {
-          if (error) console.error(`Error MQTT: ${error}`);
-        });
-      }
-  
-      // Actualizar los datos locales
+      await instance.post("/historial-acciones", {
+        macAddress,
+        accion: tipoAccion,
+        estadoAnterior,
+        estadoNuevo,
+      });
+      console.log(`✅ Acción ${tipoAccion} registrada en el historial`);
+
+      // Actualizar datos de sensores después de registrar una acción
       obtenerDatosSensores();
-      
     } catch (error) {
-      console.error("Error completo:", error);
-      if (error.response) {
-        console.error("Datos del error:", error.response.data);
-      }
+      console.error("❌ Error al registrar la acción:", error);
     }
   };
 
-  // Función para actualizar velocidad del ventilador
-  const actualizarVelocidad = async (velocidad) => {
-    try {
-      // Actualizar en la base de datos
-      await instance.post(`/estado-dispositivo/${macAddress}`, {
-        ventiladorVelocidad: velocidad
-      });
+  // Función para publicar mensajes MQTT
+  const publicarMensaje = async (tipo, comando) => {
+    if (!client.current || !mqttConnected) {
+      console.error("❌ Cliente MQTT no conectado");
+      return;
+    }
 
-      // Enviar comando MQTT
-      if (client.current && mqttConnected) {
-        const topic = `mi/topico/ventilador/speed/${macAddress}`;
-        client.current.publish(
-          topic,
-          velocidad.toString(),
-          { qos: 1, retain: false },
-          (error) => {
-            if (error) {
-              console.error(`❌ Error al publicar en ${topic}:`, error);
-            } else {
-              console.log(`✅ Mensaje enviado a ${topic}: ${velocidad}`);
-            }
+    let topic1, topic2;
+    const comandoStr = String(comando);
+
+    // Obtener el estado actual del actuador
+    let estadoAnterior;
+    let tipoAccion;
+
+    switch (tipo) {
+      case "servo":
+        estadoAnterior = datosSensores.ventanaAbierta ? "Abierta" : "Cerrada";
+        tipoAccion = "ventana";
+        break;
+      case "riego":
+        estadoAnterior = datosSensores.riegoActivo ? "Activo" : "Inactivo";
+        tipoAccion = "riego";
+        break;
+      case "ventilador":
+        estadoAnterior = datosSensores.ventiladorActivo
+          ? "Encendido"
+          : "Apagado";
+        tipoAccion = "ventilador";
+        break;
+      case "velocidad":
+        estadoAnterior = datosSensores.ventiladorVelocidad.toString();
+        tipoAccion = "ventilador";
+        break;
+      default:
+        console.error("Tipo de comando no válido");
+        return;
+    }
+
+    // Publicar el mensaje MQTT para ambos ventiladores
+    if (tipo === "ventilador") {
+      topic1 = `mi/topico/ventilador1/${macAddress}`;
+      topic2 = `mi/topico/ventilador2/${macAddress}`;
+
+      // Enviar comando a ventilador 1
+      client.current.publish(
+        topic1,
+        comandoStr,
+        { qos: 1, retain: false },
+        async (error) => {
+          if (error) {
+            console.error(`❌ Error al publicar en ${topic1}:`, error);
+          } else {
+            console.log(`✅ Mensaje enviado a ${topic1}: ${comandoStr}`);
+            await registrarAccion(tipoAccion, estadoAnterior, comandoStr);
+            // Actualizar datos después de enviar el comando
+            obtenerDatosSensores();
           }
-        );
+        }
+      );
+
+      // Enviar comando a ventilador 2
+      client.current.publish(
+        topic2,
+        comandoStr,
+        { qos: 1, retain: false },
+        async (error) => {
+          if (error) {
+            console.error(`❌ Error al publicar en ${topic2}:`, error);
+          } else {
+            console.log(`✅ Mensaje enviado a ${topic2}: ${comandoStr}`);
+            await registrarAccion(tipoAccion, estadoAnterior, comandoStr);
+            // Actualizar datos después de enviar el comando
+            obtenerDatosSensores();
+          }
+        }
+      );
+    } else {
+      // Lógica para otros tipos de comandos (servo, riego, etc.)
+      let topic;
+      switch (tipo) {
+        case "servo":
+          topic = `mi/topico/servo/${macAddress}`;
+          setLastCommands((prev) => ({ ...prev, servo: comandoStr }));
+          break;
+        case "riego":
+          topic = `mi/topico/riego/${macAddress}`;
+          setLastCommands((prev) => ({ ...prev, riego: comandoStr }));
+          break;
+        case "velocidad":
+          topic = `mi/topico/ventilador/speed/${macAddress}`;
+          setLastCommands((prev) => ({ ...prev, velocidad: comandoStr }));
+          break;
+        default:
+          console.error("Tipo de comando no válido");
+          return;
       }
 
-      // Actualizar los datos locales
-      obtenerDatosSensores();
-      
-    } catch (error) {
-      console.error("❌ Error al actualizar la velocidad:", error);
+      client.current.publish(
+        topic,
+        comandoStr,
+        { qos: 1, retain: false },
+        async (error) => {
+          if (error) {
+            console.error(`❌ Error al publicar en ${topic}:`, error);
+          } else {
+            console.log(`✅ Mensaje enviado a ${topic}: ${comandoStr}`);
+            await registrarAccion(tipoAccion, estadoAnterior, comandoStr);
+            // Actualizar datos después de enviar el comando
+            obtenerDatosSensores();
+          }
+        }
+      );
     }
   };
 
@@ -460,18 +553,24 @@ const UserDashboard = () => {
               <div className="IoT-control-buttons">
                 <button
                   className="IoT-button IoT-button-primary"
-                  onClick={() => actualizarEstado("ventana", true)}
-                  disabled={!mqttConnected || datosSensores.ventanaAbierta}
+                  onClick={() => publicarMensaje("servo", "abrir")}
+                  disabled={!mqttConnected}
                 >
                   <span className="IoT-button-text">Abrir Ventana</span>
                 </button>
                 <button
                   className="IoT-button IoT-button-danger"
-                  onClick={() => actualizarEstado("ventana", false)}
-                  disabled={!mqttConnected || !datosSensores.ventanaAbierta}
+                  onClick={() => publicarMensaje("servo", "cerrar")}
+                  disabled={!mqttConnected}
                 >
                   <span className="IoT-button-text">Cerrar Ventana</span>
                 </button>
+              </div>
+              <div className="IoT-command-info">
+                Último comando:{" "}
+                <span className="IoT-command-value">
+                  {lastCommands.servo || "Ninguno"}
+                </span>
               </div>
             </div>
           </div>
@@ -503,15 +602,15 @@ const UserDashboard = () => {
               <div className="IoT-control-buttons">
                 <button
                   className="IoT-button IoT-button-primary"
-                  onClick={() => actualizarEstado("ventilador", true)}
-                  disabled={!mqttConnected || datosSensores.ventiladorActivo}
+                  onClick={() => publicarMensaje("ventilador", "encender")}
+                  disabled={!mqttConnected}
                 >
                   <span className="IoT-button-text">Encender Ventiladores</span>
                 </button>
                 <button
                   className="IoT-button IoT-button-danger"
-                  onClick={() => actualizarEstado("ventilador", false)}
-                  disabled={!mqttConnected || !datosSensores.ventiladorActivo}
+                  onClick={() => publicarMensaje("ventilador", "apagar")}
+                  disabled={!mqttConnected}
                 >
                   <span className="IoT-button-text">Apagar Ventiladores</span>
                 </button>
@@ -526,7 +625,9 @@ const UserDashboard = () => {
                     min="0"
                     max="255"
                     value={datosSensores.ventiladorVelocidad || 0}
-                    onChange={(e) => actualizarVelocidad(e.target.value)}
+                    onChange={(e) =>
+                      publicarMensaje("velocidad", e.target.value)
+                    }
                     disabled={!mqttConnected}
                     className="IoT-slider"
                   />
@@ -565,15 +666,15 @@ const UserDashboard = () => {
               <div className="IoT-control-buttons">
                 <button
                   className="IoT-button IoT-button-primary"
-                  onClick={() => actualizarEstado("riego", true)}
-                  disabled={!mqttConnected || datosSensores.riegoActivo}
+                  onClick={() => publicarMensaje("riego", "activar")}
+                  disabled={!mqttConnected}
                 >
                   <span className="IoT-button-text">Activar Riego</span>
                 </button>
                 <button
                   className="IoT-button IoT-button-danger"
-                  onClick={() => actualizarEstado("riego", false)}
-                  disabled={!mqttConnected || !datosSensores.riegoActivo}
+                  onClick={() => publicarMensaje("riego", "desactivar")}
+                  disabled={!mqttConnected}
                 >
                   <span className="IoT-button-text">Desactivar Riego</span>
                 </button>
@@ -587,4 +688,3 @@ const UserDashboard = () => {
 };
 
 export default UserDashboard;
-
