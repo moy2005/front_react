@@ -18,8 +18,8 @@ function UsersManagementPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [updateLoading, setUpdateLoading] = useState(false);
   const [updateMessage, setUpdateMessage] = useState({ text: "", type: "" });
-  const [currentPage, setCurrentPage] = useState(1); // Estado para la página actual
-  const [usersPerPage] = useState(10); // Número de usuarios por página
+  const [currentPage, setCurrentPage] = useState(1);
+  const [usersPerPage] = useState(10);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -37,26 +37,74 @@ function UsersManagementPage() {
     fetchUsers();
   }, []);
 
+  const openModal = (user) => {
+    setSelectedUser(user);
+    setShowModal(true);
+  };
+
+  const openRoleModal = (user) => {
+    setUserToEdit(user);
+    setSelectedRole(user.role);
+    setShowRoleModal(true);
+    setUpdateMessage({ text: "", type: "" });
+  };
+
+  const handleRoleChange = (e) => {
+    setSelectedRole(e.target.value);
+  };
+
+  const handleRoleUpdate = async () => {
+    if (!userToEdit || !selectedRole) return;
+    
+    setUpdateLoading(true);
+    try {
+      await updateUser(userToEdit._id, { role: selectedRole });
+      setUsers(users.map(user => 
+        user._id === userToEdit._id ? { ...user, role: selectedRole } : user
+      ));
+      setUpdateMessage({ text: "Rol actualizado correctamente", type: "success" });
+      setTimeout(() => setShowRoleModal(false), 1500);
+    } catch (error) {
+      setUpdateMessage({ 
+        text: "Error al actualizar el rol", 
+        type: "error" 
+      });
+    } finally {
+      setUpdateLoading(false);
+    }
+  };
+
+  const handleDelete = async (userId) => {
+    if (window.confirm("¿Estás seguro de que deseas eliminar este usuario?")) {
+      try {
+        await deleteUser(userId);
+        setUsers(users.filter(user => user._id !== userId));
+      } catch (error) {
+        setError("Error al eliminar el usuario");
+      }
+    }
+  };
+
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
-    setCurrentPage(1); // Reinicia la página a 1 al realizar una búsqueda
+    setCurrentPage(1);
   };
 
   const filteredUsers = users.filter((user) =>
-    (user.realName?.toLowerCase().includes(searchTerm.toLowerCase()) || "") ||
-    (user.lastName?.toLowerCase().includes(searchTerm.toLowerCase()) || "") ||
-    (user.email?.toLowerCase().includes(searchTerm.toLowerCase()) || "") ||
+    (user.realName?.toLowerCase().includes(searchTerm.toLowerCase()) || "" ||
+    (user.lastName?.toLowerCase().includes(searchTerm.toLowerCase()) || "" ||
+    (user.email?.toLowerCase().includes(searchTerm.toLowerCase()) || "" ||
     (user.role?.toLowerCase().includes(searchTerm.toLowerCase()) || "") ||
     (searchTerm.toLowerCase() === "verificado" && user.isVerified === true) ||
     (searchTerm.toLowerCase() === "no verificado" && user.isVerified === false)
   );
 
-  // Lógica de paginación
+  // Pagination logic
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
   const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
+  const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
 
-  // Cambiar de página
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   if (loading) {
@@ -110,7 +158,7 @@ function UsersManagementPage() {
             className="search-input"
           />
         </div>
-        <Link className="create-btn">
+        <Link to="/users/create" className="create-btn">
           <FaPlus /> 
         </Link>
       </div>
@@ -163,7 +211,7 @@ function UsersManagementPage() {
         </table>
       </div>
 
-      {/* Controles de paginación */}
+      {/* Pagination controls */}
       <div className="pagination">
         <button
           onClick={() => paginate(currentPage - 1)}
@@ -173,11 +221,11 @@ function UsersManagementPage() {
           Anterior
         </button>
         <span className="pagination-info">
-          Página {currentPage} de {Math.ceil(filteredUsers.length / usersPerPage)}
+          Página {currentPage} de {totalPages}
         </span>
         <button
           onClick={() => paginate(currentPage + 1)}
-          disabled={currentPage === Math.ceil(filteredUsers.length / usersPerPage)}
+          disabled={currentPage === totalPages || totalPages === 0}
           className="pagination-btn"
         >
           Siguiente
@@ -191,7 +239,7 @@ function UsersManagementPage() {
         />
       )}
 
-      {/* Modal para editar el rol */}
+      {/* Role edit modal */}
       {showRoleModal && userToEdit && (
         <div className="user-modal-overlay">
           <div className="user-modal">
@@ -253,4 +301,3 @@ function UsersManagementPage() {
 }
 
 export default UsersManagementPage;
-
