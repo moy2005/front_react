@@ -21,22 +21,7 @@ function UsersManagementPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [usersPerPage] = useState(10);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const usersData = await getUsers();
-        setUsers(usersData);
-        setError(null);
-      } catch (err) {
-        setError("Hubo un error al cargar los usuarios.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUsers();
-  }, []);
-
+  // Definir todas las funciones ANTES de usarlas en el JSX
   const openModal = (user) => {
     setSelectedUser(user);
     setShowModal(true);
@@ -90,11 +75,27 @@ function UsersManagementPage() {
     setCurrentPage(1);
   };
 
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const usersData = await getUsers();
+        setUsers(usersData);
+        setError(null);
+      } catch (err) {
+        setError("Hubo un error al cargar los usuarios.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
   const filteredUsers = users.filter((user) =>
-    (user.realName?.toLowerCase().includes(searchTerm.toLowerCase()) || "" ||
-    (user.lastName?.toLowerCase().includes(searchTerm.toLowerCase()) || "" ||
-    (user.email?.toLowerCase().includes(searchTerm.toLowerCase()) || "" ||
-    (user.role?.toLowerCase().includes(searchTerm.toLowerCase()) || "") ||
+    (user.realName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (user.lastName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (user.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (user.role?.toLowerCase().includes(searchTerm.toLowerCase())) ||
     (searchTerm.toLowerCase() === "verificado" && user.isVerified === true) ||
     (searchTerm.toLowerCase() === "no verificado" && user.isVerified === false)
   );
