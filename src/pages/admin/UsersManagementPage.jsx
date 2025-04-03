@@ -91,14 +91,14 @@ function UsersManagementPage() {
     fetchUsers();
   }, []);
 
-  const filteredUsers = users.filter((user) =>
-    (user.realName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (user.lastName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (user.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (user.role?.toLowerCase().includes(searchTerm.toLowerCase())) ||
-    (searchTerm.toLowerCase() === "verificado" && user.isVerified === true) ||
-    (searchTerm.toLowerCase() === "no verificado" && user.isVerified === false)
-  );
+const filteredUsers = users.filter((user) =>
+  user.realName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  user.lastName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  user.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  user.role?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  (searchTerm.toLowerCase() === "verificado" && user.isVerified === true) ||
+  (searchTerm.toLowerCase() === "no verificado" && user.isVerified === false)
+);
 
   // Pagination logic
   const indexOfLastUser = currentPage * usersPerPage;
