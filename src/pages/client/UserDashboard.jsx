@@ -99,7 +99,7 @@ const UserDashboard = () => {
       protocol: 'wss' // Fuerza el protocolo seguro
     };
 
-    const url = "ws://raba7554.ala.dedicated.aws.emqxcloud.com:8084/mqtt";
+    const url = "wss://m6209e92.ala.dedicated.aws.emqxcloud.com:8084/mqtt";
     client.current = MQTT.connect(url, mqttOptions);
 
     client.current.on("connect", () => {
