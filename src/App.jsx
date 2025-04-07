@@ -78,7 +78,7 @@ function App() {
                     <BrowserRouter>
                       <main>
                         <Navbar /> {/* Barra de navegación */}
-                        <Breadcrumbs/>
+                       
 
                         <ToastContainer position="top-right" autoClose={3000} />
                         
