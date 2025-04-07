@@ -52,7 +52,7 @@ export const useMqtt = (macAddress) => {
             }
           };
 
-        const brokerUrl = "wss://raba7554.ala.dedicated.aws.emqxcloud.com:8084/mqtt";
+        const brokerUrl = "wss://m6209e92.ala.dedicated.aws.emqxcloud.com:8084/mqtt";
         clientRef.current = MQTT.connect(brokerUrl, mqttOptions);
 
         clientRef.current.on('connect', () => {
